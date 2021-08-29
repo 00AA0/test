@@ -26,7 +26,7 @@ type CrmTag struct {
 
 func main() {
 
-	fmt.Println("test2")
+	fmt.Println("test22")
 
 	//tmp := &CrmTag{}
 	//var tmp CrmTag
