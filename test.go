@@ -5,6 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 	"reflect"
 	"runtime"
 	"strconv"
@@ -12,22 +14,96 @@ import (
 	"time"
 )
 
-type LeadsInfo struct {
-	Id        int64    `json:"id" form:"id"`
-	ProductID []int64  `json:"productId" form:"productId" `
-	StageID   int64    `json:"stageId" form:"stageId" `
-	StageName string   `json:"stageName" form:"stageName" `
-	Tags      []CrmTag `json:"tags" form:"tags"`
+type CrmTagGroup struct {
+	Id         int64     `gorm:"id" json:"id"`                  // ID
+	Name       string    `gorm:"name" json:"name"`              // 标签组名
+	CreateTime time.Time `gorm:"create_time" json:"createTime"` // 创建时间
+	UpdateTime time.Time `gorm:"update_time" json:"updateTime"` // 更新时间
+	Role       int8      `gorm:"role" json:"role"`              // 角色
+	OpId       string    `gorm:"op_id" json:"opId"`             // 操作人accountID
+	Deleted    int8      `gorm:"deleted" json:"deleted"`        // 软删状态
 }
-type CrmTag struct {
-	TagId   int64  `json:"tagId"`
-	TagName string `json:"tagName"`
+type CrmTags struct {
+	Id         int64     `gorm:"id" json:"id"` // ID
+	Name       string    `gorm:"name" json:"name"`
+	CreateTime time.Time `gorm:"create_time" json:"createTime"`  // 创建时间
+	UpdateTime time.Time `gorm:"update_time" json:"updateTime"`  // 更新时间
+	TagGroupId int64     `gorm:"tag_group_id" json:"tagGroupId"` // 标签组id
+	Deleted    int64     `gorm:"deleted" json:"deleted"`         // 软删状态
+	OpId       string    `gorm:"op_id" json:"opId"`              // 操作人accountID
+}
+
+func (CrmTags) TableName() string {
+	return "tblCrmTags"
+}
+func (CrmTagGroup) TableName() string {
+	return "tblCrmTagGroup"
+}
+
+func initMySql() (client *gorm.DB, err error) {
+	client, err = gorm.Open(mysql.Open("root:123456789@(127.0.0.1)/test?charset=utf8&parseTime=True&loc=Local"), &gorm.Config{})
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	return
 }
 
 func main() {
+	db, _ := initMySql()
+	var tagGroup1 []CrmTagGroup
+	var tagGroup2 []CrmTagGroup
+	//db = db.Find(&tagGroup)
+	//fmt.Println(len(tagGroup))
 
-	fmt.Println("test2_1")
-	fmt.Println("test_1")
+	//db.Table("tblCrmTagGroup").Where("name = ?", "test_3").Update("name", "test_33")
+
+	go func() {
+		err := db.Transaction(func(tx *gorm.DB) error {
+			tx = tx.Find(&tagGroup1)
+			fmt.Println(len(tagGroup1))
+			//time.Sleep(3 * time.Second)
+			//fmt.Println("开始更新")
+			tx = tx.Table("tblCrmTagGroup").Where("name = ?", "test_4").Update("name", "44test_44")
+			//fmt.Println("更新结束")
+			db.Table("tblCrmTagGroup").Find(&tagGroup2)
+			fmt.Println(len(tagGroup2))
+			//fmt.Println(tagGroup2)
+			return nil
+		})
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+	}()
+
+	time.Sleep(2 * time.Second)
+
+	go func() {
+		err := db.Transaction(func(tx *gorm.DB) error {
+			tagGroup4 := &CrmTagGroup{
+				Name:       "test_4",
+				CreateTime: time.Now(),
+				UpdateTime: time.Now(),
+				Role:       1,
+				Deleted:    0,
+			}
+			time.Sleep(time.Second)
+			tx = tx.Create(tagGroup4)
+			fmt.Println(tagGroup4.Id)
+			var tagGroup3 []CrmTagGroup
+			tx.Find(&tagGroup3)
+			fmt.Println(len(tagGroup3))
+			return nil
+		})
+		fmt.Println("tijiao")
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+	}()
+
+	time.Sleep(5 * time.Second)
+
+	//fmt.Println("test2_1")
+	//fmt.Println("test_1")
 
 	//tmp := &CrmTag{}
 	//var tmp CrmTag
@@ -93,27 +169,27 @@ func main() {
 	//err := errors.New("qqq")
 	//1.创建路由
 	//默认使用了2个中间件Logger(), Recovery()
-	r := gin.New()
+	//r := gin.New()
 	// 注册中间件
 	//r.Use(MiddleWare())
 	//r.Use(MiddleWare2())
-	r.Use(MiddleWare3())
-	// {}为了代码规范
-	{
-		r.GET("/ce", func(c *gin.Context) {
-			// 取值
-			req, _ := c.Get("request")
-			fmt.Println("request:", req)
-			// 页面接收
-			c.JSON(200, gin.H{"request": req})
-			panic("error test")
-			//if err != nil {
-			//	panic("error")
-			//}
-
-		})
-	}
-	r.Run()
+	//r.Use(MiddleWare3())
+	//// {}为了代码规范
+	//{
+	//	r.GET("/ce", func(c *gin.Context) {
+	//		// 取值
+	//		req, _ := c.Get("request")
+	//		fmt.Println("request:", req)
+	//		// 页面接收
+	//		c.JSON(200, gin.H{"request": req})
+	//		panic("error test")
+	//		//if err != nil {
+	//		//	panic("error")
+	//		//}
+	//
+	//	})
+	//}
+	//r.Run()
 
 	//fmt.Println(time.Now().Format("2006-01-02 15:04:05"))
 	//fmt.Println(time.Unix(1623168000, 0).Format("2006-01-02 15:04:05"))
