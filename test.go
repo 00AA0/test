@@ -53,10 +53,6 @@ func main() {
 	db, _ := initMySql()
 	//var tagGroup1 []CrmTagGroup
 	var tagGroup2 []CrmTagGroup
-	//db = db.Find(&tagGroup)
-	//fmt.Println(len(tagGroup))
-
-	//db.Table("tblCrmTagGroup").Where("name = ?", "test_3").Update("name", "test_33")
 
 	go func() {
 		err := db.Transaction(func(tx *gorm.DB) error {
@@ -75,8 +71,6 @@ func main() {
 			fmt.Println(err.Error())
 		}
 	}()
-
-	//time.Sleep(2 * time.Second)
 
 	go func() {
 		err := db.Transaction(func(tx *gorm.DB) error {
