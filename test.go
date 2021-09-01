@@ -50,7 +50,7 @@ func initMySql() (client *gorm.DB, err error) {
 
 func main() {
 	db, _ := initMySql()
-	var tagGroup1 []CrmTagGroup
+	//var tagGroup1 []CrmTagGroup
 	var tagGroup2 []CrmTagGroup
 	//db = db.Find(&tagGroup)
 	//fmt.Println(len(tagGroup))
@@ -59,12 +59,12 @@ func main() {
 
 	go func() {
 		err := db.Transaction(func(tx *gorm.DB) error {
-			tx = tx.Find(&tagGroup1)
-			fmt.Println(len(tagGroup1))
-			//time.Sleep(3 * time.Second)
-			//fmt.Println("开始更新")
+			//tx = tx.Find(&tagGroup1)
+			//fmt.Println(len(tagGroup1))
+			time.Sleep(2 * time.Second)
+			fmt.Println("开始更新")
 			tx = tx.Table("tblCrmTagGroup").Where("name = ?", "test_4").Update("name", "44test_44")
-			//fmt.Println("更新结束")
+			fmt.Println("更新结束")
 			db.Table("tblCrmTagGroup").Find(&tagGroup2)
 			fmt.Println(len(tagGroup2))
 			//fmt.Println(tagGroup2)
@@ -75,23 +75,25 @@ func main() {
 		}
 	}()
 
-	time.Sleep(2 * time.Second)
+	//time.Sleep(2 * time.Second)
 
 	go func() {
 		err := db.Transaction(func(tx *gorm.DB) error {
-			tagGroup4 := &CrmTagGroup{
-				Name:       "test_4",
-				CreateTime: time.Now(),
-				UpdateTime: time.Now(),
-				Role:       1,
-				Deleted:    0,
-			}
-			time.Sleep(time.Second)
-			tx = tx.Create(tagGroup4)
-			fmt.Println(tagGroup4.Id)
+			//tagGroup4 := &CrmTagGroup{
+			//	Name:       "test_4",
+			//	CreateTime: time.Now(),
+			//	UpdateTime: time.Now(),
+			//	Role:       1,
+			//	Deleted:    0,
+			//}
+			//time.Sleep(time.Second)
+			//tx = tx.Create(tagGroup4)
+			//fmt.Println(tagGroup4.Id)
 			var tagGroup3 []CrmTagGroup
-			tx.Find(&tagGroup3)
+			tx.Where("name = ?", "test_4").Find(&tagGroup3)
 			fmt.Println(len(tagGroup3))
+			time.Sleep(5 * time.Second)
+			fmt.Println("睡眠结束")
 			return nil
 		})
 		fmt.Println("tijiao")
@@ -100,7 +102,7 @@ func main() {
 		}
 	}()
 
-	time.Sleep(5 * time.Second)
+	time.Sleep(10 * time.Second)
 
 	//fmt.Println("test2_1")
 	//fmt.Println("test_1")
