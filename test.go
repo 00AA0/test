@@ -64,10 +64,10 @@ func main() {
 	internal.SqlTest1()
 
 	db, _ := initMySql()
-	defer closeMySql(db)
+	//defer closeMySql(db)
 
 	//db.Begin()
-	db.Exec("begin;update tblCrmTagGroup set name = '11' where id = ?;", 11)
+	db.Exec("SELECT *from tblCrmTagGroup WHERE id = 13 LOCK IN SHARE MODE;") //.Exec("commit;")
 
 	//err := db.Transaction(func(tx *gorm.DB) error {
 	//	fmt.Println("开始")
