@@ -1,38 +1,15 @@
+package test
 
+type TblSchoolArchive struct {
+	Id                int    `gorm:"id" json:"id"`
+	SchoolId          int    `gorm:"school_id" json:"school_id"`                     // 学校id
+	SchoolInfo        string `gorm:"school_info" json:"school_info"`                 // 学校信息
+	MenuInfo          string `gorm:"menu_info" json:"menu_info"`                     // 菜单信息
+	RoleInfo          string `gorm:"role_info" json:"role_info"`                     // 角色信息
+	DataAuthorityInfo string `gorm:"data_authority_info" json:"data_authority_info"` // 数据权限信息
+	MenuAuthInfo      string `gorm:"menu_auth_info" json:"menu_auth_info"`           // 用户菜单权限
+}
 
-
-373	133****0987	1139e6451b668d33a708e1af39d52211e291da6a5eef0f84
-374	133****6789	cf0311368caa2be36bb514b729e2e3d5959d76dfad3fb275
-375	133****6789	cf0311368caa2be36bb514b729e2e3d5959d76dfad3fb275
-376	133****6789	cf0311368caa2be36bb514b729e2e3d5959d76dfad3fb275
-379	183****8892	7e542dae4a2b632cad3b586cda2bcca53924df98ffeb2ad4
-380	183****8892	7e542dae4a2b632cad3b586cda2bcca53924df98ffeb2ad4
-381	183****8892	7e542dae4a2b632cad3b586cda2bcca53924df98ffeb2ad4
-382	183****4321	412fb44d52620f8bd220d3df665fdf18c52be94352cd34e1
-383	183****8892	7e542dae4a2b632cad3b586cda2bcca53924df98ffeb2ad4
-384	183****8892	7e542dae4a2b632cad3b586cda2bcca53924df98ffeb2ad4
-385	183****8892	7e542dae4a2b632cad3b586cda2bcca53924df98ffeb2ad4
-386	183****8892	7e542dae4a2b632cad3b586cda2bcca53924df98ffeb2ad4
-387	134****0000	3c3d3b2151153448f0457822924da1f1d344d169c4183c71
-388	133****8964	d39ff808d45c2ce61f643d6ffaa9b1b9c329becf09f17fde
-389	138****3675	c1749fb3487e59c21ab72ad6a61c834f60ca16b4cfcb9794
-390	133****9876	d1d0924dcf8e6da7c89f2e10f7e8c77e7df2e77596436f28
-391	133****8964	d39ff808d45c2ce61f643d6ffaa9b1b9c329becf09f17fde
-392	138****3675	c1749fb3487e59c21ab72ad6a61c834f60ca16b4cfcb9794
-393	133****9876	d1d0924dcf8e6da7c89f2e10f7e8c77e7df2e77596436f28
-396	133****8964	d39ff808d45c2ce61f643d6ffaa9b1b9c329becf09f17fde
-397	138****3675	c1749fb3487e59c21ab72ad6a61c834f60ca16b4cfcb9794
-398	133****9876	d1d0924dcf8e6da7c89f2e10f7e8c77e7df2e77596436f28
-399	132****9876	53749c3ef058bbbc736ccea283759fa6e24e2792cafab039
-400	133****8765	17804d47f9c22d362fa795d176874d8269bc0103e3eef612
-401	133****5545	e36064a511df66fbc8ed6a567a42527bad4b84fc41922c10
-402	132****7788	1b37880af62493bd7b5a4a80020c514537cd5c0370adb830
-403	158****9263	fafa1a8501deb8c3ef3157ef7a9ab45a9ec9b1ee28403c8a
-404	158****9283	8cf4101ec47351b22ea4682cc1e983d363b67d38117593f9
-405	136****1456	285f576e49ceb9560285450d32e366fa92be0c120b023b7f
-406	158****3287	a390f424e49664a2822f50844270c58b96167a7a70737f3f
-407	183****8892	7e542dae4a2b632cad3b586cda2bcca53924df98ffeb2ad4
-408	158****5963	6572b2aa0a2a62cb447473090bc40f11752562193225dab1
-409	183****8892	7e542dae4a2b632cad3b586cda2bcca53924df98ffeb2ad4
-410	158****8596	8ee2342a873601cb2a19fafd4fda2b01f03a777264689094
-411	159****1395	7d9642d8dabd31b81674b1064e6fe4f5ea3120eff0eef1d5
+func (*TblSchoolArchive) TableName() string {
+	return "tblSchoolArchive"
+}

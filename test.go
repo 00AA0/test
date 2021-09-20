@@ -7,11 +7,13 @@ import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"math/rand"
 	"reflect"
+	"regexp"
 	"runtime"
+	"sort"
 	"strconv"
 	"strings"
-	"test/internal"
 	"time"
 )
 
@@ -59,15 +61,166 @@ func closeMySql(db *gorm.DB) {
 	}
 }
 
+func RandString(len int) string {
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	bytes := make([]byte, len)
+	for i := 0; i < len; i++ {
+		b := r.Intn(26) + 65
+		bytes[i] = byte(b)
+	}
+	return string(bytes)
+}
+
+type PassWordResetReq struct {
+	OpUid     int64  `json:"opUid"`
+	Uid       int64  `json:"uid"`
+	PassWord  string `json:"passWord"`
+	Timestamp int64  `json:"_timestamp"`
+	Nonce     string `json:"_nonce"` //8位长度的随机字符串
+	Sign      string `json:"_sign"`  //基于_timestamp和_nonce计算出来的签名
+}
+
+func PrefixMatch(name string, target string) bool {
+	reg := `^` + name + `[0-9]*$`
+	rgx := regexp.MustCompile(reg)
+	return rgx.MatchString(target)
+}
+
 func main() {
+	//fmt.Println(RandString(8))
+	//fmt.Println(2234235 % 20)
+	fmt.Println(100000000046 % 16)
 
-	internal.SqlTest1()
+	var userList = []string{"zh9"} //, "zh9h", "zh901", "zh93", "zh911", "zh99"}
+	name := "zh9"
+	nametmp := []rune(name)
+	n := len(nametmp) - 1
+	for n > 0 {
+		if nametmp[n] < 48 || nametmp[n] > 57 {
+			break
+		}
+		n--
+	}
+	name = string(nametmp[:n+1])
+	fmt.Println(name)
 
-	db, _ := initMySql()
+	var userUnamePingList []int
+	for _, user := range userList {
+		if !PrefixMatch(name, user) {
+			continue
+		}
+		tmp := []rune(user)
+		i := len(tmp) - 1
+		for i > 0 {
+			if tmp[i] < 48 || tmp[i] > 57 {
+				break
+			}
+			i--
+		}
+		s := string(tmp[i+1:])
+		if s == "" {
+			continue
+		}
+		atoi, err := strconv.Atoi(s)
+		if err != nil {
+			fmt.Println(err)
+		}
+		userUnamePingList = append(userUnamePingList, atoi)
+	}
+	sort.Ints(userUnamePingList)
+	fmt.Println(userUnamePingList)
+	l := len(userUnamePingList)
+	if len(userUnamePingList) == 0 {
+		fmt.Println("姓名全拼重复，推荐使用" + name + "01")
+		return
+	}
+	if l == 1 {
+		if userUnamePingList[0] == 1 {
+			fmt.Println("姓名全拼重复，推荐使用" + name + "02")
+			return
+		} else {
+			fmt.Println("姓名全拼重复，推荐使用" + name + "01")
+			return
+		}
+	}
+	if l == userUnamePingList[l-1] {
+		pre := ""
+		if l >= 10 {
+			pre = strconv.Itoa(l)
+		} else {
+			pre = "0" + strconv.Itoa(l+1)
+		}
+		fmt.Println("姓名全拼重复，推荐使用" + name + pre)
+		return
+	}
+
+	num := userUnamePingList[0]
+	for j := 1; j < len(userUnamePingList); j++ {
+		if num+1 != userUnamePingList[j] {
+			pre := ""
+			if num+1 >= 10 {
+				pre = strconv.Itoa(num + 1)
+			} else {
+				pre = "0" + strconv.Itoa(num+1)
+			}
+			fmt.Println("姓名全拼重复，推荐使用" + name + pre)
+			return
+		}
+		fmt.Println("ddddd")
+		num = userUnamePingList[j]
+	}
+	fmt.Println("aaaa")
+
+	//var data = make(map[string]interface{})
+	//for i := 0; i < typ.NumField(); i++ {
+	//	data[typ.Field(i).Name] = val.Field(i).Interface()
+	//}
+
+	//初始化
+	//t2t := converter.NewTable2Struct()
+	//// 个性化配置
+	//t2t.Config(&converter.T2tConfig{
+	//	// 如果字段首字母本来就是大写, 就不添加tag, 默认false添加, true不添加
+	//	RmTagIfUcFirsted: false,
+	//	// tag的字段名字是否转换为小写, 如果本身有大写字母的话, 默认false不转
+	//	TagToLower: false,
+	//	// 字段首字母大写的同时, 是否要把其他字母转换为小写,默认false不转换
+	//	UcFirstOnly: false,
+	//	//// 每个struct放入单独的文件,默认false,放入同一个文件(暂未提供)
+	//	//SeperatFile: false,
+	//})
+	//// 开始迁移转换
+	//err := t2t.
+	//	// 指定某个表,如果不指定,则默认全部表都迁移
+	//	Table("tblSchoolArchive").
+	//	//Table("tblUserDataAuthority0").
+	//	// 表前缀
+	//	//Prefix("prefix_").
+	//	// 是否添加json tag
+	//	EnableJsonTag(true).
+	//	// 生成struct的包名(默认为空的话, 则取名为: package model)
+	//	PackageName("test").
+	//	// tag字段的key值,默认是orm
+	//	TagKey("gorm").
+	//	// 是否添加结构体方法获取表名
+	//	RealNameMethod("TableName").
+	//	// 生成的结构体保存路径
+	//	SavePath("/Users/zyb/Desktop/test/sql").
+	//	// 数据库dsn,这里可以使用 t2t.DB() 代替,参数为 *sql.DB 对象
+	//	Dsn("homework:homework@tcp(mysql.basic.suanshubang.com:13309)/hxx_school?charset=utf8").
+	//	// 执行
+	//	Run()
+	//
+	//fmt.Println(err)
+
+	//internal.SqlTest1()
+
+	//db, _ := initMySql()
 	//defer closeMySql(db)
 
 	//db.Begin()
-	db.Exec("SELECT *from tblCrmTagGroup WHERE id = 13 LOCK IN SHARE MODE;") //.Exec("commit;")
+	//fmt.Println(time.Now().Unix())
+	//db.Exec("SELECT *from tblCrmTagGroup WHERE id = 13 LOCK IN SHARE MODE;") //.Exec("commit;")
 
 	//err := db.Transaction(func(tx *gorm.DB) error {
 	//	fmt.Println("开始")
