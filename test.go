@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/casbin/casbin/v2"
+	gormadapter "github.com/casbin/gorm-adapter/v3"
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -11,7 +13,6 @@ import (
 	"reflect"
 	"regexp"
 	"runtime"
-	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -86,90 +87,186 @@ func PrefixMatch(name string, target string) bool {
 	return rgx.MatchString(target)
 }
 
+func AuthMatch(origin string, target string) bool {
+	reg := `.*` + target + `.*`
+	rgx := regexp.MustCompile(reg)
+	return rgx.MatchString(target)
+}
+
+type UserAuth struct {
+	ID    uint   `gorm:"primaryKey;autoIncrement"`
+	Ptype string `gorm:"size:512;uniqueIndex:unique_index"`
+	V0    string `gorm:"size:512;uniqueIndex:unique_index"`
+	V1    string `gorm:"size:512;uniqueIndex:unique_index"`
+	V2    string `gorm:"size:512;uniqueIndex:unique_index"`
+	V3    string `gorm:"size:512;uniqueIndex:unique_index"`
+	V4    string `gorm:"size:512;uniqueIndex:unique_index"`
+	V5    string `gorm:"size:512;uniqueIndex:unique_index"`
+}
+
 func main() {
-	//fmt.Println(RandString(8))
-	//fmt.Println(2234235 % 20)
-	fmt.Println(100000000046 % 16)
+	fmt.Println(100000002476 % 16)
 
-	var userList = []string{"zh9"} //, "zh9h", "zh901", "zh93", "zh911", "zh99"}
-	name := "zh9"
-	nametmp := []rune(name)
-	n := len(nametmp) - 1
-	for n > 0 {
-		if nametmp[n] < 48 || nametmp[n] > 57 {
-			break
-		}
-		n--
-	}
-	name = string(nametmp[:n+1])
-	fmt.Println(name)
+	//db, _ := initMySql()
+	////
+	//a, _ := gormadapter.NewAdapterByDBWithCustomTable(db, &UserAuth{})
+	//e, _ := casbin.NewEnforcer("examples/rbac_model.conf", a)
 
-	var userUnamePingList []int
-	for _, user := range userList {
-		if !PrefixMatch(name, user) {
-			continue
-		}
-		tmp := []rune(user)
-		i := len(tmp) - 1
-		for i > 0 {
-			if tmp[i] < 48 || tmp[i] > 57 {
-				break
-			}
-			i--
-		}
-		s := string(tmp[i+1:])
-		if s == "" {
-			continue
-		}
-		atoi, err := strconv.Atoi(s)
-		if err != nil {
-			fmt.Println(err)
-		}
-		userUnamePingList = append(userUnamePingList, atoi)
-	}
-	sort.Ints(userUnamePingList)
-	fmt.Println(userUnamePingList)
-	l := len(userUnamePingList)
-	if len(userUnamePingList) == 0 {
-		fmt.Println("姓名全拼重复，推荐使用" + name + "01")
-		return
-	}
-	if l == 1 {
-		if userUnamePingList[0] == 1 {
-			fmt.Println("姓名全拼重复，推荐使用" + name + "02")
-			return
-		} else {
-			fmt.Println("姓名全拼重复，推荐使用" + name + "01")
-			return
-		}
-	}
-	if l == userUnamePingList[l-1] {
-		pre := ""
-		if l >= 10 {
-			pre = strconv.Itoa(l)
-		} else {
-			pre = "0" + strconv.Itoa(l+1)
-		}
-		fmt.Println("姓名全拼重复，推荐使用" + name + pre)
+	//a, err := gormadapter.NewAdapter("mysql", "root:123456789@tcp(127.0.0.1:3306)/", "test", "UserAuth") // Your driver and data source.
+	a, err := gormadapter.NewAdapter("mysql", "root:123456789@tcp(127.0.0.1:3306)/", "test") // Your driver and data source.
+	//fmt.Println(err)
+	//fmt.Println(a)
+	//enforcer := casbin.Enforcer{}
+	//enforcer.SetAdapter(middleware.CasbinAdapter{})
+	//e, err := casbin.NewEnforcer("./model.conf", middleware.CasbinAdapter{}, true)
+
+	e, err := casbin.NewCachedEnforcer("./model.conf", a)
+	if e == nil || err != nil {
+		fmt.Println(err)
 		return
 	}
 
-	num := userUnamePingList[0]
-	for j := 1; j < len(userUnamePingList); j++ {
-		if num+1 != userUnamePingList[j] {
-			pre := ""
-			if num+1 >= 10 {
-				pre = strconv.Itoa(num + 1)
-			} else {
-				pre = "0" + strconv.Itoa(num+1)
-			}
-			fmt.Println("姓名全拼重复，推荐使用" + name + pre)
-			return
-		}
-		fmt.Println("ddddd")
-		num = userUnamePingList[j]
-	}
-	fmt.Println("aaaa")
+	var ok bool
+	//ok, err = e.AddGroupingPolicy("user111", "role111")
+	ok, err = e.AddPolicy("user1", "role2")
+	//ok, err = e.AddPolicy("user2",  "role1")
+	//ok, err = e.AddPolicy("user3",  "role2")
+	//ok, err = e.AddPolicy("user4",  "role3")
+	//ok, err = e.AddPolicy("role3",  "/auth/c", "(get)|(post)")
+	//ok, err = e.AddPolicy("role3",  "/auth/r", "(get)|(post)")
+	//ok, err = e.AddPolicy("role3",  "/auth/u", "(get)|(post)")
+	//ok, err = e.AddPolicy("role2",  "/auth/c", "get")
+	//ok, err = e.AddPolicy("role2",  "/auth/r", "get")
+	//ok, err = e.AddPolicy("role1",  "/auth/*", "(get)|(post)")
+	//_, _ = e.AddPolicy("root", "/auth/*", "get")
+	//_, _ = e.UpdatePolicy([]string{"eve", "data3", "read"}, []string{"eve", "data3", "write"})
+	//_, _ = e.RemovePolicy("alice", "data1", "read")
+
+	//fmt.Println(ok, err)
+	//ok, _ = e.AddGroupingPolicy("name1", "root")
+	//ok, _ = e.RemoveGroupingPolicy("name1", "root")
+	//ok, _ = e.UpdateGroupingPolicy([]string{"name1", "root"}, []string{"admin", "data4_admin"})
+
+	//fmt.Println(ok)
+	e.SetExpireTime(uint(time.Hour * 8))
+	ok, _ = e.Enforce("user1", "/auth/rdsds", "post")
+	//e.UpdatePolicy()
+	fmt.Println(ok)
+
+	//err = e.LoadPolicy()
+
+	//err = e.SavePolicy()
+
+	//inf := m()
+	//req, ok := inf.(CrmTagGroup)
+	//fmt.Println(req, ok)
+	//
+	//var userList = []string{"zh9", "zh9h", "zh901", "zh93", "zh911", "zh99"}
+	//
+	//
+	//name := "zh01"
+	//nametmp := []rune(name)
+	//n := len(nametmp) - 1
+	//for n > 0 {
+	//	if nametmp[n] < 48 || nametmp[n] > 57 {
+	//		break
+	//	}
+	//	n--
+	//}
+	//name = string(nametmp[:n+1])
+	//
+	////s := string(nametmp[n+1:])
+	////if s == "" {
+	////	fmt.Println("kong")
+	////	return
+	////}
+	////nu, err := strconv.Atoi(s)
+	////if err != nil {
+	////	fmt.Println(err)
+	////	return
+	////}
+	//
+	//var userUnamePingList []int
+	//for _, user := range userList {
+	//	if !PrefixMatch(name, user) {
+	//		continue
+	//	}
+	//	tmp := []rune(user)
+	//	i := len(tmp) - 1
+	//	for i > 0 {
+	//		if tmp[i] < 48 || tmp[i] > 57 {
+	//			break
+	//		}
+	//		i--
+	//	}
+	//	s := string(tmp[i+1:])
+	//	if s == "" {
+	//		userUnamePingList = append(userUnamePingList, 0)
+	//		continue
+	//	}
+	//	atoi, err := strconv.Atoi(s)
+	//	if err != nil {
+	//		fmt.Println(err)
+	//	}
+	//	userUnamePingList = append(userUnamePingList, atoi)
+	//}
+	//sort.Ints(userUnamePingList)
+	//fmt.Println(userUnamePingList)
+
+	//for i, v := range userUnamePingList {
+	//	if v + 1 == nu {
+	//		continue
+	//	}
+	//}
+
+	//l := len(userUnamePingList)
+	//if l != userUnamePingList[l-1] {
+	//	fmt.Println("姓名全拼重复，推荐使用" + name + "0" + strconv.Itoa(l))
+	//	return
+	//}
+
+	//
+	//if len(userUnamePingList) == 1 {
+	//	if userUnamePingList[0]
+	//	fmt.Println("error")
+	//	//fmt.Println("姓名全拼重复，推荐使用" + name + "01")
+	//	return
+	//}
+	//if l == 1 {
+	//	if userUnamePingList[0] == 1 {
+	//		fmt.Println("姓名全拼重复，推荐使用" + name + "02")
+	//		return
+	//	} else {
+	//		fmt.Println("姓名全拼重复，推荐使用" + name + "01")
+	//		return
+	//	}
+	//}
+	//if l == userUnamePingList[l-1] {
+	//	pre := ""
+	//	if l >= 10 {
+	//		pre = strconv.Itoa(l)
+	//	} else {
+	//		pre = "0" + strconv.Itoa(l+1)
+	//	}
+	//	fmt.Println("姓名全拼重复，推荐使用" + name + pre)
+	//	return
+	//}
+	//
+	//num := 0// userUnamePingList[0]
+	//for j := 0; j < len(userUnamePingList); j++ {
+	//	if num + 1 != userUnamePingList[j] {
+	//		pre := ""
+	//		if num + 1 >= 10 {
+	//			pre = strconv.Itoa(num + 1)
+	//		} else {
+	//			pre = "0" + strconv.Itoa(num+1)
+	//		}
+	//		fmt.Println("姓名全拼重复，推荐使用" + name + pre)
+	//		return
+	//	}
+	//	num = userUnamePingList[j]
+	//}
+	//fmt.Println("success")
 
 	//var data = make(map[string]interface{})
 	//for i := 0; i < typ.NumField(); i++ {
@@ -327,26 +424,32 @@ func main() {
 	//		"message": fmt.Sprintf("'%s' uploaded!", file.Filename),
 	//	})
 	//})
-
-	//router.GET("/method", func(c *gin.Context) {
-	//
-	//	for {
-	//		now := time.Now()
-	//		defer func() {
-	//			if i := recover(); i != nil {
-	//				fmt.Println(i)
-	//
-	//			}
-	//		}()
-	//		time.Sleep(1000*1000*1000)
-	//		since := time.Since(now)
-	//		fmt.Println(since)
-	//		if since > 0 {
-	//			panic("aa")
-	//		}
-	//		c.String(200, "hello hello")
-	//	}
+	//t := router.Group("/test")
+	//{
+	//	t.GET("/m1", func(c *gin.Context) {
+	//		fmt.Println(c.Request.URL.RequestURI())
+	//		fmt.Println(c.Request.URL.Path)
+	//		fmt.Println(c.PostForm("aa"))
+	//	})
+	//}
+	//router.GET("/m", func(c *gin.Context) {
+	//	fmt.Println(c.Request.URL.RequestURI())
+	//	fmt.Println(c.Request.Method)
+	//	//for {
+	//	//	now := time.Now()
+	//	//	defer func() {
+	//	//		if i := recover(); i != nil {
+	//	//			fmt.Println(i)
+	//	//
+	//	//		}
+	//	//	}()
+	//	//	time.Sleep(1000*1000*1000)
+	//	//	since := time.Since(now)
+	//	//	fmt.Println(since)
+	//	//	c.String(200, "hello hello")
+	//	//}
 	//})
+
 	//
 	//router.Run(":8080")
 
