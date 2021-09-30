@@ -37,6 +37,22 @@ func AddPolicy(roleMenu []RoleMenu) (ok bool, err error) {
 	for _, menu := range roleMenu {
 		fmt.Println(menu.RoleId, menu.MenuId, menu.Opids)
 	}
+
+	//m := make([]map[string]string, 0)
+
+	//m := map[string]string{
+	//	"schui/auth/adduser": "100112",
+	//	"schui/auth/editrole": "100117",
+	//}
+	//
+	//mGet := map[string]string{
+	//	"schui/auth/getmenutree": "schui/auth/editrole#schui/auth/addrole",
+	//	"schui/auth/getroleinfo": "schui/auth/editrole",
+	//	"schui/auth/adduserinfo": "schui/auth/adduser",
+	//	"schui/auth/edituserinfos": "schui/auth/edituserbatch#schui/auth/edituser",
+	//	"schui/teacher/list": "schui/class/add#schui/class/update",
+	//	"schui/class/detail": "schui/class/update",
+	//}
 	return
 }
 func AddGroupingPolicy(userRole []TblUserRole) (ok bool, err error) {
