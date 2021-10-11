@@ -93,12 +93,18 @@ func AuthMatch(origin string, target string) bool {
 }
 
 func main() {
-	fmt.Println(100000002476 % 16)
+	fmt.Println(200002 % 16)
 	// todo 密码改为随机密码
 	// todo 默认用户只分配管理员角色一个
 
 	api.InitRedis()
-
+	api.RedisClent.ZRangeByScoreAndZRem("salary", 0, 50000, false, false, 0, 5)
+	// b := []byte{106,97, 99, 107}
+	//fmt.Println(string(b))
+	//add, err := api.RedisClent.ZAdd("salary", map[string]int64{"mark": 10000, "bob": 2000})
+	//fmt.Println(add, err)
+	//api.RedisClent.ZRangeByScore("salary", 0, 50000, false, false, 0, 5)
+	//num, err := api.RedisClent.ZRem("salary", "bob", "mark")
 	//num, err := api.RedisClent.LPush("list", "value2")
 	//fmt.Println(num, err)
 	//api.RedisClent.BLPop("list", 5)

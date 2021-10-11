@@ -3,6 +3,7 @@ package api
 import (
 	"fmt"
 	"github.com/garyburd/redigo/redis"
+	"reflect"
 )
 
 // https://www.cnblogs.com/caoshouling/p/12219037.html
@@ -38,6 +39,14 @@ func InitRedis() {
 	}
 	RedisClent.redisClent = redisClent
 	fmt.Println("redis connection success")
+}
+
+/*
+	key
+*/
+
+func (r *Redis) Del(keys ...interface{}) (int64, error) {
+	return redis.Int64(r.redisClent.Do("DEL", keys...))
 }
 
 /*
@@ -103,6 +112,93 @@ func (r *Redis) BRPop(key string, timeout int64) (slices [][]byte, err error) {
 	zset
 */
 
+func (r *Redis) ZAdd(key string, maps map[string]int64) (int64, error) {
+	args := []interface{}{key}
+	for member, score := range maps {
+		args = append(args, score, member)
+	}
+	return redis.Int64(r.redisClent.Do("ZADD", args...))
+}
+
+// 返回有序集 key 中，所有 score 值介于 min 和 max 之间(包括等于 min 或 max )的成员。
+// 有序集成员按 score 值递增(从小到大)次序排列。
+// withscores指定是否返回得分，
+// limit 是否分页方法，false返回所有的数据
+func (r *Redis) ZRangeByScore(key string, min int, max int, withscores, limit bool, offset int, count int) (slices [][]byte, err error) {
+	args := []interface{}{key, min, max}
+	if withscores {
+		args = append(args, "WITHSCORES")
+	}
+	if limit {
+		args = append(args, "LIMIT", offset, count)
+	}
+	slices, err = redis.ByteSlices(r.redisClent.Do("ZRANGEBYSCORE", args...))
+	if err == redis.ErrNil {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+	for _, slice := range slices {
+		fmt.Println(string(slice))
+	}
+	return slices, nil
+}
+
+// 移除有序集 key 中的一个或多个成员，不存在的成员将被忽略
+// return: 被成功移除的成员的数量，不包括被忽略的成员
+func (r *Redis) ZRem(key string, members ...string) (num int64, err error) {
+	args := packArgs(key, members)
+	num, err = redis.Int64(r.redisClent.Do("ZREM", args...))
+	if err == redis.ErrNil {
+		return 0, nil
+	}
+	if err != nil {
+		return 0, err
+	}
+	return num, nil
+}
+func (r *Redis) ZRangeByScoreAndZRem(key string, min int, max int, withscores, limit bool, offset int, count int) (slices [][]byte, err error) {
+	//script := "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return -1 end"
+	script := "return redis.call('ZRANGEBYSCORE', KEYS[1], KEYS[2], KEYS[3], 'limit', KEYS[5], KEYS[6])"
+	reply, err := r.Lua(script, 6, key, min, max, limit, offset, count)
+	fmt.Println(reply)
+	value := reflect.ValueOf(reply)
+	fmt.Println(value.Kind())
+	of := reflect.ValueOf(value.Index(0))
+	fmt.Println(of.Kind())
+
+	for i := 0; i < of.NumField(); i++ {
+		fmt.Println(reflect.ValueOf(of.Type()).Kind())
+		//i2 := of.Elem().Field(i)
+		//fmt.Println(i2)
+		//b = append(b, )
+	}
+	//fmt.Println(b)
+
+	//for i := 0; i < value.Len(); i++ {
+	//	fmt.Println(string(value.Index(i).Bytes()))
+	//}
+	//args := []interface{}{key, min, max}
+	//if withscores {
+	//	args = append(args, "WITHSCORES")
+	//}
+	//if limit {
+	//	args = append(args, "LIMIT", offset, count)
+	//}
+	//slices, err = redis.ByteSlices(r.redisClent.Do("ZRANGEBYSCORE", args...))
+	//if err == redis.ErrNil {
+	//	return nil, nil
+	//}
+	//if err != nil {
+	//	return nil, err
+	//}
+	//for _, slice := range slices {
+	//	fmt.Println(string(slice))
+	//}
+	return slices, nil
+}
+
 /*
 	lua
 */
@@ -111,4 +207,29 @@ func (r *Redis) Lua(script string, keyCount int, keysAndArgs ...interface{}) (in
 	lua := redis.NewScript(keyCount, script)
 	reply, err := lua.Do(r.redisClent, keysAndArgs...)
 	return reply, err
+}
+
+func packArgs(items ...interface{}) (args []interface{}) {
+	for _, item := range items {
+		v := reflect.ValueOf(item)
+		switch v.Kind() {
+		case reflect.Slice:
+			if v.IsNil() {
+				continue
+			}
+			for i := 0; i < v.Len(); i++ {
+				args = append(args, v.Index(i).Interface())
+			}
+		case reflect.Map:
+			if v.IsNil() {
+				continue
+			}
+			for _, key := range v.MapKeys() {
+				args = append(args, key.Interface(), v.MapIndex(key).Interface())
+			}
+		default:
+			args = append(args, v.Interface())
+		}
+	}
+	return args
 }
