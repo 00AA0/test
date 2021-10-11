@@ -98,8 +98,8 @@ func main() {
 	// todo 默认用户只分配管理员角色一个
 
 	api.InitRedis()
-	api.RedisClent.ZRangeByScoreAndZRem("salary", 0, 50000, false, false, 0, 5)
-	// b := []byte{106,97, 99, 107}
+	api.RedisClent.ZRangeByScoreAndZRem("salary", 0, 50000, false, false, 0, 1)
+	// b := []byte{106,97, 99,  107}
 	//fmt.Println(string(b))
 	//add, err := api.RedisClent.ZAdd("salary", map[string]int64{"mark": 10000, "bob": 2000})
 	//fmt.Println(add, err)

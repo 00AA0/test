@@ -158,44 +158,12 @@ func (r *Redis) ZRem(key string, members ...string) (num int64, err error) {
 	}
 	return num, nil
 }
-func (r *Redis) ZRangeByScoreAndZRem(key string, min int, max int, withscores, limit bool, offset int, count int) (slices [][]byte, err error) {
-	//script := "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return -1 end"
-	script := "return redis.call('ZRANGEBYSCORE', KEYS[1], KEYS[2], KEYS[3], 'limit', KEYS[5], KEYS[6])"
-	reply, err := r.Lua(script, 6, key, min, max, limit, offset, count)
+func (r *Redis) ZRangeByScoreAndZRem(key string, min int64, max int64, withscores, limit bool, offset int, count int) (slices [][]byte, err error) {
+
+	script := "local tbl = redis.call('ZRANGEBYSCORE', KEYS[1], KEYS[2], KEYS[3], 'limit', '0', '1') " +
+		"if #tbl > 0 then return redis.call('ZREM', KEYS[1], tbl[1]) else return -1 end"
+	reply, err := r.Lua(script, 3, key, min, max)
 	fmt.Println(reply)
-	value := reflect.ValueOf(reply)
-	fmt.Println(value.Kind())
-	of := reflect.ValueOf(value.Index(0))
-	fmt.Println(of.Kind())
-
-	for i := 0; i < of.NumField(); i++ {
-		fmt.Println(reflect.ValueOf(of.Type()).Kind())
-		//i2 := of.Elem().Field(i)
-		//fmt.Println(i2)
-		//b = append(b, )
-	}
-	//fmt.Println(b)
-
-	//for i := 0; i < value.Len(); i++ {
-	//	fmt.Println(string(value.Index(i).Bytes()))
-	//}
-	//args := []interface{}{key, min, max}
-	//if withscores {
-	//	args = append(args, "WITHSCORES")
-	//}
-	//if limit {
-	//	args = append(args, "LIMIT", offset, count)
-	//}
-	//slices, err = redis.ByteSlices(r.redisClent.Do("ZRANGEBYSCORE", args...))
-	//if err == redis.ErrNil {
-	//	return nil, nil
-	//}
-	//if err != nil {
-	//	return nil, err
-	//}
-	//for _, slice := range slices {
-	//	fmt.Println(string(slice))
-	//}
 	return slices, nil
 }
 
