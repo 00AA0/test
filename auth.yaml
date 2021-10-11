@@ -1,107 +1,111 @@
 menu:
-#  角色
-  schui/auth/getbaseinfo:
+  #  角色
+  /schui/auth/getbaseinfo:
     - "该接口不鉴权"
   # 查看
-  schui/auth/getrolelist:
+  /schui/auth/getrolelist:
     - "100111"
   # 成员
-  schui/auth/getroleuserlist:
-     - "100112"
+  /schui/auth/getroleuserlist:
+    - "100112"
+  # 和成员关联
+  /schui/auth/delroleuser:
+    - "100112"
   # 编辑
-  schui/auth/editrole:
+  /schui/auth/editrole:
     - "100113"
   # 和编辑关联
-  schui/auth/getroleinfo:
+  /schui/auth/getroleinfo:
     - "100113"
-  # 需要拆分
-  schui/auth/setrolestatus:
-     - "100114"
-#  schui/auth/setrolestatus":
-#    - "100115"
+  # 停用 需要拆分
+  /schui/auth/setrolestatus:
+    - "100114"
+  # 启用
+  #  /schui/auth/setrolestatus":
+  #    - "100115"
   # 删除
-  schui/auth/delroleuser:
-    - "100116"
+  #  /schui/auth/setrolestatus":
+  #    - "100116"
   # 添加角色
-  schui/auth/addrole:
+  /schui/auth/addrole:
     - "100117"
   # 和添加角色关联
-  schui/auth/getmenutree:
+  /schui/auth/getmenutree:
     - "100117"
-#  用户
+  #  用户
   # 查看
-  schui/auth/getuserlist:
+  /schui/auth/getuserlist:
     - "100121"
   # 编辑
-  schui/auth/edituser:
+  /schui/auth/edituser:
     - "100123"
   # 和编辑关联
-  schui/auth/edituserinfo:
+  /schui/auth/edituserinfo:
     - "100123"
   # 删除
-  schui/auth/deluser:
+  /schui/auth/deluser:
     - "100126"
   # 重置密码
-  schui/auth/setpasswd:
+  /schui/auth/setpasswd:
     - "100128"
   # 添加用户
-  schui/auth/adduser:
+  /schui/auth/adduser:
     - "100129"
   # 和添加用户关联
-  schui/auth/adduserinfo:
+  /schui/auth/adduserinfo:
     - "100129"
   # 和添加用户关联
-  schui/auth/use:
+  /schui/user/checkping:
     - "100129"
   # 批量配置权限
-  schui/auth/edituserbatch:
+  /schui/auth/edituserbatch:
     - "1001210"
   # 和批量配置权限关联
-  schui/auth/edituserinfos:
+  /schui/auth/edituserinfos:
     - "1001210"
-#  学校
+  #  学校
   # 查看
-  schui/school/detail:
+  /schui/school/detail:
     - "100211"
-#  老师
+  #  老师
   # 查看
-  schui/teacher/managelist:
+  /schui/teacher/managelist:
     - "100221"
   # 编辑
-  schui/teacher/update:
+  /schui/teacher/update:
     - "100223"
   # 删除
-  schui/teacher/del:
+  /schui/teacher/del:
     - "100226"
   # 添加老师
-  schui/teacher/add:
+  /schui/teacher/add:
     - "1002211"
   # 批量导入
-  schui/teacher/batchadd:
+  /schui/teacher/batchadd:
     - "1002212"
-#  班级
+  #  班级
   # 查看
-  schui/class/list:
+  /schui/class/list:
     - "100231"
   # 和查看关联
-  schui/school/grade/list:
+  /schui/school/grade/list:
     - "100231"
   # 和查看关联
-  schui/school/subjectList:
+  /schui/school/subjectList:
     - "100231"
   # 编辑
-  schui/class/update:
+  /schui/class/update:
     - "100233"
   # 和编辑关联
-  schui/class/detail:
+  /schui/class/detail:
     - "100233"
   # 删除
-  schui/class/del:
+  /schui/class/del:
     - "100236"
   # 添加班级
-  schui/school/grade/add:
+  /schui/school/grade/add:
     - "1002313"
   # 和编辑，添加班级关联
-  schui/teacher/list:
+  /schui/teacher/list:
     - "100233"
     - "1002313"
