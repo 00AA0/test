@@ -7,13 +7,13 @@ import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"math"
 	"math/rand"
 	"reflect"
 	"regexp"
 	"runtime"
 	"strconv"
 	"strings"
-	"test/internal/api"
 	"time"
 )
 
@@ -87,18 +87,128 @@ func PrefixMatch(name string, target string) bool {
 }
 
 func AuthMatch(origin string, target string) bool {
-	reg := `.*` + target + `.*`
+	reg := `.*` + origin + `.*`
 	rgx := regexp.MustCompile(reg)
 	return rgx.MatchString(target)
 }
 
-func main() {
-	fmt.Println(200002 % 16)
-	// todo 密码改为随机密码
-	// todo 默认用户只分配管理员角色一个
+func GetRandomPassWord() string {
+	//password := ""
+	//rand.Seed(time.Now().UnixNano())
+	//for i := 0; i < 6; i++ {
+	//	password += strconv.Itoa(rand.Intn(9))
+	//}
+	//return password
+	rand.Seed(time.Now().UnixNano())
+	//r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	return fmt.Sprintf("%06v", rand.Int31n(100000))
+	//return strconv.Itoa(int(rand.Int31()))
 
-	api.InitRedis()
-	api.RedisClent.ZRangeByScoreAndZRem("salary", 0, 50000, false, false, 0, 1)
+	//passWord := rand.New(rand.NewSource(time.Now().UnixNano())).Int31n(1000000)
+	//return strconv.Itoa(int(passWord))
+}
+
+func AuthReplace(origin string, target string) string {
+	reg := `` + target + ","
+	rgx := regexp.MustCompile(reg)
+	return rgx.ReplaceAllString(origin+",", "")
+}
+
+type Role struct {
+	RoleId     int64  `gorm:"role_id;primaryKey;autoIncrement"  json:"RoleId"`     // 角色id
+	OriRoleId  int64  `gorm:"ori_role_id"                       json:"oriRoleId"`  // 来源id，即内部系统的角色id，仅默认角色存在来源id
+	RoleName   string `gorm:"role_name"                         json:"roleName"`   // 角色名称
+	RoleRemark string `gorm:"role_remark"                       json:"roleRemark"` // 角色描述
+	SchoolId   int64  `gorm:"school_id"                         json:"schoolId"`   // 学校id
+	RoleType   int8   `gorm:"role_type"                         json:"roleType"`   // 1: 默认 2:普通
+	RoleStatus int8   `gorm:"role_status"                       json:"roleStatus"` // 1:正常 2:关闭 3:删除
+	OpUid      int64  `gorm:"op_uid"                            json:"opUid"`      // 操作人uid
+	CreateTime int64  `gorm:"create_time"                      json:"createTime"`  // 创建时间
+	UpdateTime int64  `gorm:"update_time"                      json:"updateTime"`  // 更新时间
+}
+
+type RoleMenu1 struct {
+	Id         int64  `gorm:"id"           json:"id"`        // 自增id
+	RoleId     int64  `gorm:"role_id"      json:"roleId"`    // 角色id
+	MenuId     int64  `gorm:"menu_id"      json:"menuId"`    // 菜单id
+	Opids      string `gorm:"opids"        json:"opids"`     // 菜单操作权限， 空则表示拥有所有操作权限  [1,2,3]
+	Status     int8   `gorm:"status"       json:"status"`    // 1:正常 2:删除
+	OpUid      int64  `gorm:"op_uid"       json:"opUid"`     // 操作人uid
+	CreateTime int64  `gorm:"create_time" json:"createTime"` // 创建时间
+	UpdateTime int64  `gorm:"update_time" json:"updateTime"` // 更新时间
+}
+
+func main() {
+
+	fmt.Println(math.Sqrt(1429753778013246017))
+	fmt.Println(math.Sqrt(1429753778013246000))
+	fmt.Println(math.Pow(2, 32))
+	fmt.Println(math.Pow(2, 64))
+	fmt.Println(math.Sqrt(16))
+	fmt.Println(320075 % 16)
+	//fmt.Println(235*17*3)
+
+	//str := "130,55,140,258,259,260,259,259,259,259,259,259,259,259,258,140,140,140,140,140,140,140"
+	//fmt.Println(AuthMatch( "140", ori))
+	//fmt.Println(strings.TrimRight(AuthReplace(str, "140"), ","))
+
+	//m := make(map[string]interface{})
+	//i, ok := m["ssa"]
+	//fmt.Println(i, ok)
+	//m["ssa"] = 1
+	//i, ok = m["ssa"]
+	//fmt.Println(i, ok)
+	//fmt.Println(reflect.TypeOf(m["ssa"]).)
+
+	//passWord := ""
+	//for i := 0; i < 100000; i++ {
+	//	//time.Sleep(time.Millisecond * 10)
+	//	passWord = GetRandomPassWord()
+	//	//fmt.Println(passWord)
+	//	if len(passWord) != 6 {
+	//		fmt.Println(passWord)
+	//	}
+	//}
+
+	//sum := 0.0
+	//num := 12.0
+	//for i := 0; i < 8; i++ {
+	//	fmt.Printf("%f  ",num)
+	//	sum = num + sum * 1.08
+	//	num = num * 1.1
+	//}
+	//fmt.Println()
+	//fmt.Println(sum)
+
+	//t, _ := time.ParseDuration("-1m")
+
+	//fmt.Println(t)
+	//
+	//fmt.Println(time.Now().Add(t))
+
+	//db, _ := initMySql()
+	//
+	//tagGroups := make([]CrmTagGroup, 100000)
+	//for i := 0; i < 100000; i++ {
+	//	t, _ := time.ParseDuration("-" + strconv.Itoa(i) + "m")
+	//	tagGroups[i] = CrmTagGroup{
+	//		Id:         0,
+	//		Name:       strconv.Itoa(i),
+	//		CreateTime: time.Now().Add(t),
+	//		UpdateTime: time.Now().Add(t),
+	//		Role:       0,
+	//		OpId:       "",
+	//		Deleted:    0,
+	//	}
+	//}
+	//db = db.CreateInBatches(tagGroups, 1000)
+	//if db.Error != nil {
+	//	fmt.Println(db.Error)
+	//}
+	//
+	//api.InitRedis()
+
+	//api.RedisClent.ZRangeByScoreAndZRem("salary", 0, 50000, false, false, 0, 1)
 	// b := []byte{106,97, 99,  107}
 	//fmt.Println(string(b))
 	//add, err := api.RedisClent.ZAdd("salary", map[string]int64{"mark": 10000, "bob": 2000})
@@ -138,6 +248,9 @@ func main() {
 	//}
 	////
 	//err = yaml.Unmarshal(yamlFile, t)
+
+	//opid, ok := t["menu"]["schui/auth/getbaseinfo"]
+	//fmt.Println(opid, ok)
 	//if err != nil {
 	//	log.Fatalf("Unmarshal: %v", err)
 	//}
@@ -212,113 +325,6 @@ func main() {
 	//inf := m()
 	//req, ok := inf.(CrmTagGroup)
 	//fmt.Println(req, ok)
-	//
-	//var userList = []string{"zh9", "zh9h", "zh901", "zh93", "zh911", "zh99"}
-	//
-	//
-	//name := "zh01"
-	//nametmp := []rune(name)
-	//n := len(nametmp) - 1
-	//for n > 0 {
-	//	if nametmp[n] < 48 || nametmp[n] > 57 {
-	//		break
-	//	}
-	//	n--
-	//}
-	//name = string(nametmp[:n+1])
-	//
-	////s := string(nametmp[n+1:])
-	////if s == "" {
-	////	fmt.Println("kong")
-	////	return
-	////}
-	////nu, err := strconv.Atoi(s)
-	////if err != nil {
-	////	fmt.Println(err)
-	////	return
-	////}
-	//
-	//var userUnamePingList []int
-	//for _, user := range userList {
-	//	if !PrefixMatch(name, user) {
-	//		continue
-	//	}
-	//	tmp := []rune(user)
-	//	i := len(tmp) - 1
-	//	for i > 0 {
-	//		if tmp[i] < 48 || tmp[i] > 57 {
-	//			break
-	//		}
-	//		i--
-	//	}
-	//	s := string(tmp[i+1:])
-	//	if s == "" {
-	//		userUnamePingList = append(userUnamePingList, 0)
-	//		continue
-	//	}
-	//	atoi, err := strconv.Atoi(s)
-	//	if err != nil {
-	//		fmt.Println(err)
-	//	}
-	//	userUnamePingList = append(userUnamePingList, atoi)
-	//}
-	//sort.Ints(userUnamePingList)
-	//fmt.Println(userUnamePingList)
-
-	//for i, v := range userUnamePingList {
-	//	if v + 1 == nu {
-	//		continue
-	//	}
-	//}
-
-	//l := len(userUnamePingList)
-	//if l != userUnamePingList[l-1] {
-	//	fmt.Println("姓名全拼重复，推荐使用" + name + "0" + strconv.Itoa(l))
-	//	return
-	//}
-
-	//
-	//if len(userUnamePingList) == 1 {
-	//	if userUnamePingList[0]
-	//	fmt.Println("error")
-	//	//fmt.Println("姓名全拼重复，推荐使用" + name + "01")
-	//	return
-	//}
-	//if l == 1 {
-	//	if userUnamePingList[0] == 1 {
-	//		fmt.Println("姓名全拼重复，推荐使用" + name + "02")
-	//		return
-	//	} else {
-	//		fmt.Println("姓名全拼重复，推荐使用" + name + "01")
-	//		return
-	//	}
-	//}
-	//if l == userUnamePingList[l-1] {
-	//	pre := ""
-	//	if l >= 10 {
-	//		pre = strconv.Itoa(l)
-	//	} else {
-	//		pre = "0" + strconv.Itoa(l+1)
-	//	}
-	//	fmt.Println("姓名全拼重复，推荐使用" + name + pre)
-	//	return
-	//}
-	//
-	//num := 0// userUnamePingList[0]
-	//for j := 0; j < len(userUnamePingList); j++ {
-	//	if num + 1 != userUnamePingList[j] {
-	//		pre := ""
-	//		if num + 1 >= 10 {
-	//			pre = strconv.Itoa(num + 1)
-	//		} else {
-	//			pre = "0" + strconv.Itoa(num+1)
-	//		}
-	//		fmt.Println("姓名全拼重复，推荐使用" + name + pre)
-	//		return
-	//	}
-	//	num = userUnamePingList[j]
-	//}
-	//fmt.Println("success")
 
 	//var data = make(map[string]interface{})
 	//for i := 0; i < typ.NumField(); i++ {
@@ -451,7 +457,6 @@ func main() {
 	//fmt.Println(tmp == (CrmTag{}))
 	//fmt.Println(leadsInfo == (LeadsInfo{}))
 
-	//router := gin.Default()
 	//// 处理multipart forms提交文件时默认的内存限制是32 MiB
 	//// 可以通过下面的方式修改
 	//// router.MaxMultipartMemory = 8 << 20  // 8 MiB
@@ -476,41 +481,56 @@ func main() {
 	//		"message": fmt.Sprintf("'%s' uploaded!", file.Filename),
 	//	})
 	//})
+	//router := gin.Default()
 	//t := router.Group("/test")
 	//{
 	//	t.GET("/m1", func(c *gin.Context) {
-	//		fmt.Println(c.Request.URL.RequestURI())
-	//		fmt.Println(c.Request.URL.Path)
-	//		fmt.Println(c.PostForm("aa"))
+	//
+	//		if c.Request.Method == "GET" {
+	//			query := c.Request.URL.Query()
+	//			query.Set("login_uid", "gdsLoggedUid")
+	//			query.Add("data[classIds]", "a")
+	//			//get := query.Get("sas")
+	//			//s := query.Get("login_uid")
+	//			//fmt.Println(get)
+	//			//fmt.Println(s)
+	//			//defaultQuery := c.DefaultQuery("aa", "aa")
+	//			//fmt.Println(defaultQuery)
+	//			//getQuery, b := c.GetQuery("gradeIds")
+	//			//fmt.Println(getQuery, b)
+	//			//s2, b2 := c.GetQuery("ss")
+	//			//fmt.Println(s2, b2)
+	//			query.Add("login_uid", "gdsLoggedUid")
+	//			query.Add("login_uid", "gdsLoggedUid2")
+	//			c.Request.URL, _ = c.Request.URL.Parse(query.Encode())
+	//			fmt.Println(c.Request.URL)
+	//		}
+	//		if c.Request.Method == "POST" {
+	//			bodyData, _ := c.GetRawData()
+	//			input := make(map[string]interface{})
+	//			err := json.Unmarshal(bodyData, &input)
+	//			input["test"] = "test"
+	//			fmt.Println(err)
+	//			newData, _ := json.Marshal(input)
+	//			c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(newData))
+	//			fmt.Println(c.Request.Body)
+	//		}
+	//		body := c.Request.Body
+	//		i := make([]byte, 512)
+	//		read, err := body.Read(i)
+	//		fmt.Println(err)
+	//
+	//		//body.Read()
 	//	})
 	//}
-	//router.GET("/m", func(c *gin.Context) {
-	//	fmt.Println(c.Request.URL.RequestURI())
-	//	fmt.Println(c.Request.URL.Path)
-	//for {
-	//now := time.Now()
-	//defer func() {
-	//	if i := recover(); i != nil {
-	//		fmt.Println(i)
-	//
-	//	}
-	//}()
-	//time.Sleep(1000*1000*1000)
-	//since := time.Since(now)
-	//fmt.Println(since)
-	//c.String(200, "hello hello")
-	//})
-
 	//router.Run(":8080")
 
 	//fmt.Println(zap.Error(errors.New("sdsd")))
-	//log.Printf("aa")
-	//fmt.Println(len("😊"))
 	//err := errors.New("qqq")
 	//1.创建路由
 	//默认使用了2个中间件Logger(), Recovery()
 	//r := gin.New()
-	// 注册中间件
+	////注册中间件
 	//r.Use(MiddleWare())
 	//r.Use(MiddleWare2())
 	//r.Use(MiddleWare3())

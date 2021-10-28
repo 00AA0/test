@@ -17,21 +17,22 @@ menu:
   # 和编辑关联
   /schui/auth/getroleinfo:
     - "100113"
-  # 停用 需要拆分
-  /schui/auth/setrolestatus:
+  # 停用
+  /schui/auth/stopusingrole:
     - "100114"
   # 启用
-  #  /schui/auth/setrolestatus":
-  #    - "100115"
+  /schui/auth/startusingrole:
+    - "100115"
   # 删除
-  #  /schui/auth/setrolestatus":
-  #    - "100116"
+  /schui/auth/deleterole:
+    - "100116"
   # 添加角色
   /schui/auth/addrole:
     - "100117"
   # 和添加角色关联
   /schui/auth/getmenutree:
     - "100117"
+
   #  用户
   # 查看
   /schui/auth/getuserlist:
@@ -63,16 +64,23 @@ menu:
   # 和批量配置权限关联
   /schui/auth/edituserinfos:
     - "1001210"
+
+
   #  学校
   # 查看
   /schui/school/detail:
     - "100211"
+
+
   #  老师
   # 查看
   /schui/teacher/managelist:
     - "100221"
   # 编辑
   /schui/teacher/update:
+    - "100223"
+  # 和编辑关联
+  /schui/teacher/detail:
     - "100223"
   # 删除
   /schui/teacher/del:
@@ -83,6 +91,8 @@ menu:
   # 批量导入
   /schui/teacher/batchadd:
     - "1002212"
+
+
   #  班级
   # 查看
   /schui/class/list:
@@ -99,13 +109,58 @@ menu:
   # 和编辑关联
   /schui/class/detail:
     - "100233"
+  # 和编辑关联
+  /schui/class/stulist:
+    - "100233"
   # 删除
   /schui/class/del:
     - "100236"
   # 添加班级
-  /schui/school/grade/add:
+  /schui/class/add:
     - "1002313"
   # 和编辑，添加班级关联
   /schui/teacher/list:
     - "100233"
     - "1002313"
+  /schui/stu/batchadd:
+    - "1002314"
+
+  # 学生
+  /schui/stu/managelist:
+    - "100241"
+  # 编辑
+  /schui/stu/update:
+    - "100243"
+  # 和编辑关联
+  /schui/stu/detail:
+  # 和编辑关联
+  /schui/class/baselist:
+  # 删除
+  /schui/stu/del:
+    - "100246"
+  # 添加学生
+  /schui/stu/add:
+    - "1002415"
+
+  
+  # 设备
+  /schui/device/checkstation:
+    - "100251"
+  /schui/device/bindstation:
+    - "100251"
+  /schui/device/unbindstation:
+    - "100251"
+  /schui/device/rebindstation:
+    - "100251"
+  /schui/device/syndevice:
+    - "100251"
+  /schui/device/binddevice:
+    - "100251"
+  /schui/device/setnamestatus:
+    - "100251"
+  /schui/device/setbindstatus:
+    - "100251"
+  /schui/device/stationlist:
+    - "100251"
+  /schui/device/devicelist:
+    - "100251"

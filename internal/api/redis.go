@@ -75,6 +75,31 @@ func (r *Redis) Unlock(key string, value interface{}) (flag bool, err error) {
 }
 
 /*
+	string
+*/
+
+func (r *Redis) Set(key string, value string) error {
+	res, err := redis.String(r.redisClent.Do("SET", key, value))
+	if err != nil {
+		return err
+	}
+	fmt.Println(res)
+	return nil
+}
+
+func (r *Redis) Get(key string) ([]byte, error) {
+	bytes, err := redis.Bytes(r.redisClent.Do("GET", key))
+	if err == redis.ErrNil {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+	fmt.Println(string(bytes))
+	return bytes, err
+}
+
+/*
 	list
 */
 func (r *Redis) LPush(key string, value string) (int, error) {
@@ -158,8 +183,8 @@ func (r *Redis) ZRem(key string, members ...string) (num int64, err error) {
 	}
 	return num, nil
 }
-func (r *Redis) ZRangeByScoreAndZRem(key string, min int64, max int64, withscores, limit bool, offset int, count int) (slices [][]byte, err error) {
 
+func (r *Redis) ZRangeByScoreAndZRem(key string, min int64, max int64, withscores, limit bool, offset int, count int) (slices [][]byte, err error) {
 	script := "local tbl = redis.call('ZRANGEBYSCORE', KEYS[1], KEYS[2], KEYS[3], 'limit', '0', '1') " +
 		"if #tbl > 0 then return redis.call('ZREM', KEYS[1], tbl[1]) else return -1 end"
 	reply, err := r.Lua(script, 3, key, min, max)
