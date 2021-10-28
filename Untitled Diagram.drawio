@@ -1,1 +1,85 @@
-<mxfile host="app.diagrams.net" modified="2021-10-27T11:37:52.329Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.1 Safari/605.1.15" version="15.6.0" etag="ySHKGlIyI4ytutUW6rLP" type="github"><diagram id="KMlm1KyeIBmnvQSUs3WO">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2021-10-28T08:12:45.239Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.1 Safari/605.1.15" etag="rRq2SXNHKH8XpebjYjPN" version="15.6.0" type="github">
+  <diagram id="KMlm1KyeIBmnvQSUs3WO" name="Page-1">
+    <mxGraphModel dx="1426" dy="825" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ApSXKXKb_fBx45cL0dqR-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ApSXKXKb_fBx45cL0dqR-1" target="ApSXKXKb_fBx45cL0dqR-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="354" y="210" />
+              <mxPoint x="100" y="210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ApSXKXKb_fBx45cL0dqR-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ApSXKXKb_fBx45cL0dqR-1" target="ApSXKXKb_fBx45cL0dqR-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="354" y="210" />
+              <mxPoint x="680" y="210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ApSXKXKb_fBx45cL0dqR-1" value="中间件" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="294" y="30" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ApSXKXKb_fBx45cL0dqR-2" value="判断是否有权限" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="250" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ApSXKXKb_fBx45cL0dqR-3" value="查出用户的 &amp;nbsp; classIds，将用户 ClassIds 拼到&amp;nbsp;&lt;span style=&quot;font-size: small&quot;&gt;dataAuth&lt;/span&gt;&lt;br&gt;中" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="250" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ApSXKXKb_fBx45cL0dqR-9" value="传了 classId" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="200" y="180" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ApSXKXKb_fBx45cL0dqR-10" value="没传 classId，或没有 classId" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="430" y="180" width="170" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ApSXKXKb_fBx45cL0dqR-16" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=5;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="9" y="340" as="sourcePoint" />
+            <mxPoint x="819" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ApSXKXKb_fBx45cL0dqR-17" value="&lt;font style=&quot;font-size: 22px&quot;&gt;schui&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="45" y="50" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ApSXKXKb_fBx45cL0dqR-19" value="&lt;font size=&quot;2&quot;&gt;取出请求中的 dataAuth(数据权限鉴权结构体)：将它赋值给一个全局变量（map）&lt;br&gt;&lt;/font&gt;" style="whiteSpace=wrap;html=1;fontSize=22;" vertex="1" parent="1">
+          <mxGeometry x="560" y="422.5" width="400" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="ApSXKXKb_fBx45cL0dqR-20" value="目前有五个接口需要在 model 加入&lt;br&gt;（db.Where(&quot;class_id in ?&quot;, AuthData[requestID].ClassIds）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="560" y="540" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ApSXKXKb_fBx45cL0dqR-21" value="&lt;font style=&quot;font-size: 22px&quot;&gt;sch&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="55" y="390" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ApSXKXKb_fBx45cL0dqR-22" value="&lt;font style=&quot;font-size: 14px&quot;&gt;sch结构体没有改变&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=22;" vertex="1" parent="1">
+          <mxGeometry x="20" y="450" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ApSXKXKb_fBx45cL0dqR-25" value="新增了&lt;span style=&quot;font-size: small&quot;&gt;dataAuth(数据权限鉴权结构体)&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="30" y="80" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ApSXKXKb_fBx45cL0dqR-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fontSize=14;strokeWidth=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ApSXKXKb_fBx45cL0dqR-26" target="ApSXKXKb_fBx45cL0dqR-19">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="530" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ApSXKXKb_fBx45cL0dqR-26" value="中间件" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="300" y="420" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ApSXKXKb_fBx45cL0dqR-34" value="" style="endArrow=classic;html=1;rounded=0;fontSize=14;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="340" as="sourcePoint" />
+            <mxPoint x="360" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ApSXKXKb_fBx45cL0dqR-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fontSize=14;strokeWidth=1;" edge="1" parent="1" source="ApSXKXKb_fBx45cL0dqR-37" target="ApSXKXKb_fBx45cL0dqR-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ApSXKXKb_fBx45cL0dqR-37" value="model层" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="300" y="540" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
