@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36a8a31d-9b59-4e0a-b360-3b506852aaf7" name="Default Changelist" comment="test">
-      <change afterPath="$PROJECT_DIR$/internal/api/resp.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/api/utils.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/ping.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/api/tmp.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/auth.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/api/redis.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/redis.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/api/resp.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/resp.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/api/utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/utils.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql" beforeDir="false" afterPath="$PROJECT_DIR$/text.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,6 +26,11 @@
   </component>
   <component name="GOROOT" url="file:///usr/local/go" />
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1xNnoJyZ7HMnplrr0t0ybieb5UC" />
@@ -107,9 +112,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Go Build.go build test.go" />
-        <item itemvalue="Go Build.go build main.go" />
         <item itemvalue="Go Build.go build redis.go" />
+        <item itemvalue="Go Build.go build main.go" />
         <item itemvalue="Go Build.go build casbin" />
+        <item itemvalue="Go Build.go build test.go" />
       </list>
     </recent_temporary>
   </component>
@@ -183,9 +189,39 @@
           <option name="timeStamp" value="81" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/api/resp.go</url>
+          <line>12</line>
+          <option name="timeStamp" value="109" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/test.go</url>
-          <line>490</line>
-          <option name="timeStamp" value="104" />
+          <line>579</line>
+          <option name="timeStamp" value="110" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/api/resp.go</url>
+          <line>124</line>
+          <option name="timeStamp" value="116" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/test.go</url>
+          <line>254</line>
+          <option name="timeStamp" value="117" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/test.go</url>
+          <line>242</line>
+          <option name="timeStamp" value="121" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/test.go</url>
+          <line>252</line>
+          <option name="timeStamp" value="122" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/test.go</url>
+          <line>211</line>
+          <option name="timeStamp" value="125" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

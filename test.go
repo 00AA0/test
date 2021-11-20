@@ -7,7 +7,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"math"
 	"math/rand"
 	"reflect"
 	"regexp"
@@ -86,12 +85,6 @@ func PrefixMatch(name string, target string) bool {
 	return rgx.MatchString(target)
 }
 
-func AuthMatch(origin string, target string) bool {
-	reg := `.*` + origin + `.*`
-	rgx := regexp.MustCompile(reg)
-	return rgx.MatchString(target)
-}
-
 func GetRandomPassWord() string {
 	//password := ""
 	//rand.Seed(time.Now().UnixNano())
@@ -114,77 +107,70 @@ func AuthReplace(origin string, target string) string {
 	return rgx.ReplaceAllString(origin+",", "")
 }
 
+type ID int64
+
 type Role struct {
-	RoleId     int64  `gorm:"role_id;primaryKey;autoIncrement"  json:"RoleId"`     // 角色id
-	OriRoleId  int64  `gorm:"ori_role_id"                       json:"oriRoleId"`  // 来源id，即内部系统的角色id，仅默认角色存在来源id
-	RoleName   string `gorm:"role_name"                         json:"roleName"`   // 角色名称
-	RoleRemark string `gorm:"role_remark"                       json:"roleRemark"` // 角色描述
-	SchoolId   int64  `gorm:"school_id"                         json:"schoolId"`   // 学校id
-	RoleType   int8   `gorm:"role_type"                         json:"roleType"`   // 1: 默认 2:普通
-	RoleStatus int8   `gorm:"role_status"                       json:"roleStatus"` // 1:正常 2:关闭 3:删除
-	OpUid      int64  `gorm:"op_uid"                            json:"opUid"`      // 操作人uid
-	CreateTime int64  `gorm:"create_time"                      json:"createTime"`  // 创建时间
-	UpdateTime int64  `gorm:"update_time"                      json:"updateTime"`  // 更新时间
+	RoleId     int64                  `gorm:"role_id;primaryKey;autoIncrement"  json:"RoleId"`     // 角色id
+	OriRoleId  int64                  `gorm:"ori_role_id"                       json:"oriRoleId"`  // 来源id，即内部系统的角色id，仅默认角色存在来源id
+	RoleName   string                 `gorm:"role_name"                         json:"roleName"`   // 角色名称
+	RoleMenu   RoleMenu1              `gorm:"role_menu"                         json:"role_menu"`  // 角色名称
+	RoleRemark map[string]interface{} `gorm:"role_remark"                       json:"roleRemark"` // 角色描述
+	SchoolId   []int64                `gorm:"school_id"                         json:"schoolId"`   // 学校id
+	Id         ID                     `gorm:"id"                         json:"id"`                // 学校id
+	//RoleType   int8   `gorm:"role_type"                         json:"roleType"`   // 1: 默认 2:普通
+	//RoleStatus int8   `gorm:"role_status"                       json:"roleStatus"` // 1:正常 2:关闭 3:删除
+	//OpUid      int64  `gorm:"op_uid"                            json:"opUid"`      // 操作人uid
+	//CreateTime int64  `gorm:"create_time"                      json:"createTime"`  // 创建时间
+	//UpdateTime int64  `gorm:"update_time"                      json:"updateTime"`  // 更新时间
 }
 
 type RoleMenu1 struct {
-	Id         int64  `gorm:"id"           json:"id"`        // 自增id
-	RoleId     int64  `gorm:"role_id"      json:"roleId"`    // 角色id
-	MenuId     int64  `gorm:"menu_id"      json:"menuId"`    // 菜单id
-	Opids      string `gorm:"opids"        json:"opids"`     // 菜单操作权限， 空则表示拥有所有操作权限  [1,2,3]
-	Status     int8   `gorm:"status"       json:"status"`    // 1:正常 2:删除
-	OpUid      int64  `gorm:"op_uid"       json:"opUid"`     // 操作人uid
-	CreateTime int64  `gorm:"create_time" json:"createTime"` // 创建时间
-	UpdateTime int64  `gorm:"update_time" json:"updateTime"` // 更新时间
+	Id int64 `gorm:"id"           json:"id"` // 自增id
+	//RoleId     int64  `gorm:"role_id"      json:"roleId"`    // 角色id
+	//MenuId     int64  `gorm:"menu_id"      json:"menuId"`    // 菜单id
+	Opids string `gorm:"opids"        json:"opids"` // 菜单操作权限， 空则表示拥有所有操作权限  [1,2,3]
+	//Status     int8   `gorm:"status"       json:"status"`    // 1:正常 2:删除
+	//OpUid      int64  `gorm:"op_uid"       json:"opUid"`     // 操作人uid
+	//CreateTime int64  `gorm:"create_time" json:"createTime"` // 创建时间
+	//UpdateTime int64  `gorm:"update_time" json:"updateTime"` // 更新时间
+}
+
+func AuthMatch(origin string, target string) bool {
+	reg := `.*` + origin + "," + `.*`
+	rgx := regexp.MustCompile(reg)
+	return rgx.MatchString(target + ",")
+}
+
+type Unit struct {
+	//UnitId       int     `json:"unitId"`
+	//UnitName     string `json:"unitName"`
+	//BusinessType int8   `json:"businessType"`
+	Selected bool `json:"selected"`
+	// 办学性质
+}
+
+//type TreeResp struct {
+//	DepartmentList []*DeptBase `json:"departmentList"`
+//}
+//type DeptBase struct {
+//	DepartmentId       int64      `json:"departmentId"`
+//	ParentDepartmentId int64       `json:"parentDepartmentId"`
+//	Level              int         `json:"level"`
+//	Children           []*DeptBase `json:"children"`
+//}
+type DepartmentBase struct {
+	DepartmentId       int64             `json:"departmentId"`
+	ParentDepartmentId int64             `gorm:"column:parent_department_id;default:0;NOT NULL"` // 父级部门
+	Level              int               `gorm:"-" json:"level"`                                 // 部门层级
+	Children           []*DepartmentBase `json:"children"`
 }
 
 func main() {
-
-	fmt.Println(math.Sqrt(1429753778013246017))
-	fmt.Println(math.Sqrt(1429753778013246000))
-	fmt.Println(math.Pow(2, 32))
-	fmt.Println(math.Pow(2, 64))
-	fmt.Println(math.Sqrt(16))
-	fmt.Println(320075 % 16)
-	//fmt.Println(235*17*3)
-
-	//str := "130,55,140,258,259,260,259,259,259,259,259,259,259,259,258,140,140,140,140,140,140,140"
-	//fmt.Println(AuthMatch( "140", ori))
-	//fmt.Println(strings.TrimRight(AuthReplace(str, "140"), ","))
-
-	//m := make(map[string]interface{})
-	//i, ok := m["ssa"]
-	//fmt.Println(i, ok)
-	//m["ssa"] = 1
-	//i, ok = m["ssa"]
-	//fmt.Println(i, ok)
-	//fmt.Println(reflect.TypeOf(m["ssa"]).)
-
-	//passWord := ""
-	//for i := 0; i < 100000; i++ {
-	//	//time.Sleep(time.Millisecond * 10)
-	//	passWord = GetRandomPassWord()
-	//	//fmt.Println(passWord)
-	//	if len(passWord) != 6 {
-	//		fmt.Println(passWord)
-	//	}
-	//}
-
-	//sum := 0.0
-	//num := 12.0
-	//for i := 0; i < 8; i++ {
-	//	fmt.Printf("%f  ",num)
-	//	sum = num + sum * 1.08
-	//	num = num * 1.1
-	//}
-	//fmt.Println()
-	//fmt.Println(sum)
-
-	//t, _ := time.ParseDuration("-1m")
-
-	//fmt.Println(t)
-	//
-	//fmt.Println(time.Now().Add(t))
+	fmt.Println(20011 % 16)
+	////fmt.Println(1424590771167718592 % 16)
+	//fmt.Println(math.Sqrt(1430142863001258348))
+	//fmt.Println(math.Pow(2, 31))
+	//fmt.Println(16000/22/12)
 
 	//db, _ := initMySql()
 	//
@@ -271,9 +257,8 @@ func main() {
 	//for s, i := range t {
 	//	fmt.Println(s, i)
 	//}
-
 	//db, _ := initMySql()
-	////
+	//
 	//a, _ := gormadapter.NewAdapterByDBWithCustomTable(db, &UserAuth{})
 	//e, _ := casbin.NewEnforcer("examples/rbac_model.conf", a)
 
@@ -314,8 +299,7 @@ func main() {
 
 	//fmt.Println(ok)
 	//e.SetExpireTime(uint(time.Hour * 8))
-	//ok, _ = e.Enforce("user1", "/auth/rdsds", "post")
-	//e.UpdatePolicy()
+	//ok, _ := e.Enforce("user1", "/auth/rdsds", "post")
 	//fmt.Println(ok)
 
 	//err = e.LoadPolicy()
@@ -347,7 +331,7 @@ func main() {
 	//// 开始迁移转换
 	//err := t2t.
 	//	// 指定某个表,如果不指定,则默认全部表都迁移
-	//	Table("tblSchoolArchive").
+	//	Table("tblUserOrganization").
 	//	//Table("tblUserDataAuthority0").
 	//	// 表前缀
 	//	//Prefix("prefix_").
@@ -362,7 +346,7 @@ func main() {
 	//	// 生成的结构体保存路径
 	//	SavePath("/Users/zyb/Desktop/test/sql").
 	//	// 数据库dsn,这里可以使用 t2t.DB() 代替,参数为 *sql.DB 对象
-	//	Dsn("homework:homework@tcp(mysql.basic.suanshubang.com:13309)/hxx_school?charset=utf8").
+	//	Dsn("homework:homework@tcp(mysql.basic.suanshubang.com:13309)/hxx_unit?charset=utf8").
 	//	// 执行
 	//	Run()
 	//
@@ -481,10 +465,11 @@ func main() {
 	//		"message": fmt.Sprintf("'%s' uploaded!", file.Filename),
 	//	})
 	//})
+	//net.Dial()
 	//router := gin.Default()
 	//t := router.Group("/test")
 	//{
-	//	t.GET("/m1", func(c *gin.Context) {
+	//	t.POST("/m1", func(c *gin.Context) {
 	//
 	//		if c.Request.Method == "GET" {
 	//			query := c.Request.URL.Query()
@@ -506,21 +491,23 @@ func main() {
 	//			fmt.Println(c.Request.URL)
 	//		}
 	//		if c.Request.Method == "POST" {
-	//			bodyData, _ := c.GetRawData()
-	//			input := make(map[string]interface{})
-	//			err := json.Unmarshal(bodyData, &input)
-	//			input["test"] = "test"
-	//			fmt.Println(err)
-	//			newData, _ := json.Marshal(input)
-	//			c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(newData))
-	//			fmt.Println(c.Request.Body)
+	//			form := c.PostForm("a")
+	//			fmt.Println(form)
+	//			//bodyData, _ := c.GetRawData()
+	//			//input := make(map[string]interface{})
+	//			//err := json.Unmarshal(bodyData, &input)
+	//			//input["test"] = "test"
+	//			//fmt.Println(err)
+	//			//newData, _ := json.Marshal(input)
+	//			//c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(newData))
+	//			//c.JSON(http.StatusOK, input)
+	//			//fmt.Println(c.Writer)
+	//			//write, err := c.Writer.Write(bodyData)
+	//			//fmt.Println(write, err)
+	//			//
+	//			//fmt.Println(c.Request.Body)
 	//		}
-	//		body := c.Request.Body
-	//		i := make([]byte, 512)
-	//		read, err := body.Read(i)
-	//		fmt.Println(err)
 	//
-	//		//body.Read()
 	//	})
 	//}
 	//router.Run(":8080")
