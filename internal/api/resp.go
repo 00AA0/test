@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"math"
 )
 
 const MAX_PRINT_BODY_LEN = 512
@@ -122,4 +123,55 @@ func ListConvertTree() {
 	fmt.Println("xxxxx")
 	fmt.Println("xxxxx")
 	fmt.Println("xxxxx")
+}
+
+func X() {
+	fmt.Println(3300*12 + 330*10.8 + 150*12 + 12*3000)
+	fmt.Println(3300*12 + 330*10.8 + 150*12 + 12*5000)
+
+	tmp := make([]float64, 7)
+	tmp[0] = 23
+	salary := 23.0
+	fmt.Printf("%.2f,", float64(salary))
+	for i := 0; i < 6; i++ {
+		salary = salary * (1 + 0.08)
+		fmt.Printf("%.2f,", float64(salary))
+	}
+	fmt.Println()
+	salary = 23.0
+	yearCost := 10.0
+	fmt.Printf("%.2f,", float64(yearCost))
+	for i := 0; i < 6; i++ {
+		salary = salary * (1 + 0.08)
+		yearCost = yearCost * (1 + 0.05)
+		fmt.Printf("%.2f,", float64(yearCost))
+	}
+	fmt.Println()
+
+	salary = 23.0
+	yearCost = 10.0
+	saveMoney := 13.0
+	fmt.Printf("%.2f,", float64(saveMoney))
+	for i := 0; i < 6; i++ {
+		salary = salary * (1 + 0.08)
+		yearCost = yearCost * (1 + 0.05)
+		saveMoney = (saveMoney + (salary - yearCost)) * 1.08
+		tmp[i+1] = salary
+		fmt.Printf("%.2f,", float64(saveMoney))
+	}
+
+	fmt.Println()
+	for i := 0; i < 7; i++ {
+		fmt.Printf("%.2f,", float64(tmp[i]/0.70))
+	}
+	fmt.Println()
+	for i := 0; i < 7; i++ {
+		fmt.Printf("%.2f,", float64(tmp[i]/0.70/14))
+	}
+	fmt.Println()
+	for i := 0; i < 7; i++ {
+		fmt.Printf("%.2f,", float64(tmp[i]/14))
+	}
+	fmt.Println()
+	fmt.Println(163 / math.Pow(1.04, 7))
 }

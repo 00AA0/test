@@ -1,0 +1,20 @@
+package test
+
+type TblChamber struct {
+	Id           int    `gorm:"id" json:"id"`                       // 场馆id
+	Name         string `gorm:"name" json:"name"`                   // 场馆名称
+	Capacity     int    `gorm:"capacity" json:"capacity"`           // 可容纳人数
+	Remark       string `gorm:"remark" json:"remark"`               // 场馆说明
+	BuildingName string `gorm:"building_name" json:"building_name"` // 建筑名称
+	Floor        string `gorm:"floor" json:"floor"`                 // 楼层
+	HouseNumber  string `gorm:"house_number" json:"house_number"`   // 门牌号
+	Status       int    `gorm:"status" json:"status"`               // 状态： 1:正常 2.异常 3.删除
+	SchoolId     int    `gorm:"school_id" json:"school_id"`         // 学校id
+	OpUid        int    `gorm:"op_uid" json:"op_uid"`               // 操作人id
+	CreateTime   int    `gorm:"create_time" json:"create_time"`     // 创建时间
+	UpdateTime   int    `gorm:"update_time" json:"update_time"`     // 更新时间
+}
+
+func (*TblChamber) TableName() string {
+	return "tblChamber"
+}

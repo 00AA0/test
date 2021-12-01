@@ -1,75 +1,88 @@
 package api
 
-//根据用户查询顶级机构：登陆
-
-type GetUnitIdReq struct {
-	Uid int64 `json:"uid"`
-}
-
-type GetUnitIdResp struct {
-	UnitId int64 `json:"unitId"`
-}
-
-//根据（uid，）机构id 查询机构信息：基础信息
-type GetOrganizationInfoReq struct {
-	Uid    int64 `json:"uid"`
-	UnitId int64 `json:"UnitId"`
-}
-type GetOrganizationInfoResp struct {
-	UnitId           int64  `json:"unitId"`
-	OrganizationName string `json:"organizationName"`
-	Phone            string `json:"phone"`
-	Address          string `json:"address"`
-	//appinfo
-}
-
-//根据机构ID（机构名称），机构类型查询下辖机构：下辖机构
-type GetChildOrganizationListReq struct {
-	Uid          int64 `json:"uid"`
-	UnitId       int64 `json:"unitId"`
-	BusinessType int   `json:"businessType"`
-}
-type GetChildOrganizationListResp struct {
-	ChildOrganization []Organization `json:"childOrganization"`
-}
-
-type Organization struct {
-	UnitId           int64  `json:"unitId"`
-	OrganizationName string `json:"organizationName"`
-	BusinessType     int8   `json:"businessType"`
-	// 办学性质
-}
-
-//分配角色：roleIds，机构ids，uid
-type SetRoleReq struct {
-	RoleIds []int64 `json:"roleIds" binding:"required"`
-	Uid     int64   `json:"uid"`
-	UnitIds []int64 `json:"UnitIds"`
-}
-type SetRoleResp struct {
-}
-
-//批量分配角色：[]分配角色
-
-//MQ异步将（用户，用户-角色）写入 sch
+//1. 场馆列表
+//type ChamberListReq struct {
+//	SchoolId    dto.ID `form:"schoolId" binding:"required"`
+//	ChamberId   dto.ID `json:"chamberId" form:"chamberId"` // 场馆id
+//	Capacity    int    `json:"capacity" form:"capacity"`   // 场馆容量大于这个值
+//	ChamberName string `form:"chamberName"`                // 场馆名称
+//	Status      int8   `form:"status"`                     // 场馆状态
+//	PageNum     int    `form:"pageNum"`
+//	PageSize    int    `form:"pageSize"`
+//}
+//type ChamberListResp struct {
+//	Total    int       `json:"total"`
+//	PageNum  int       `json:"pageNum"`
+//	PageSize int       `json:"pageSize"`
+//	List     []Chamber `json:"list"`
+//}
+//type Chamber struct {
+//	ChamberId    dto.ID `json:"chamberId" form:"chamberId"`       // 场馆id
+//	ChamberName  string `json:"chamberName" form:"chamberName"`   // 场馆名称
+//	Capacity     int    `json:"capacity" form:"capacity"`         // 场馆容量
+//	Status       int8   `json:"status" form:"status"`             // 场馆状态
+//	StatusName   string `json:"statusName" form:"statusName"`     // 场馆状态名称
+//	Remark       string `json:"remark" form:"remark"`             // 场馆描述
+//	BuildingName string `json:"buildingName" form:"buildingName"` // 建筑名称
+//	Floor        string `json:"floor" form:"floor"`               // 楼层
+//	HouseNumber  string `json:"houseNumber" form:"houseNumber"`   // 门牌号
+//}
 //
-//分配角色展示：机构id｜全量角色信息，下辖机构
-type SetRoleInfoReq struct {
-	Uid    int64 `json:"uid"`
-	UnitId int64 `json:"UnitId"`
-}
-type SetRoleInfoResp struct {
-	RoleInfo          []RoleInfo     `json:"roleInfo"`
-	ChildOrganization []Organization `json:"childOrganization"`
-}
-type RoleInfo struct {
-	RoleName string `json:"roleName"`
-	RoleId   int64  `json:"roleId"`
-	Selected bool   `json:"selected"`
-}
-
-//获取用户列表：顶级机构分配的人员不能操作，包括重置密码
+//// 2. 删除场馆
+//type DelChamberReq struct {
+//	ChamberId dto.ID `json:"chamberId"` // 场馆id
+//}
+//type DelChamberResp struct {
+//}
 //
-//重置密码：
+//// 3. 批量导入场馆
+//type BatchAddChamberReq struct {
+//}
+//type BatchAddChamberResp struct {
+//	Result     bool             `json:"result"`     // true: 场馆，false: 失败
+//	SuccessCnt int              `json:"successCnt"` // 成功数量
+//	FailCnt    int              `json:"failCnt"`    // 失败数量
+//	FailList   []AddFailChamber `json:"failList"`   // 失败列表
+//}
+//type AddFailChamber struct {
+//	SerialNumber int    `json:"serialNumber"` // 序号
+//	RowNum       int    `json:"rowNum"`       // 第几行出错
+//	Reason       string `json:"reason"`       // 出错原因
+//	ChamberList  Chamber
+//}
 //
-//删除用户：
+//// 4. 新增场馆信息展示
+//type AddChamberInfoReq struct {
+//}
+//type AddChamberInfoResp struct {
+//	ChamberStatus []ChamberStatus `json:"chamberStatus"`
+//}
+//
+//type ChamberStatus struct {
+//	Status     int8   `json:"status"`     // 场馆状态
+//	StatusName string `json:"statusName"` // 场馆状态名称
+//}
+//
+//// 5. 新增场馆
+//type AddChamberReq struct {
+//	Chamber Chamber
+//}
+//type AddChamberResp struct {
+//}
+//
+//// 6. 编辑场馆信息展示
+//type EditChamberInfoReq struct {
+//	ChamberId dto.ID `form:"chamberId"` // 场馆id
+//}
+//type EditChamberInfoResp struct {
+//	Chamber Chamber
+//	ChamberStatus []ChamberStatus `json:"chamberStatus"`
+//}
+//
+//// 7. 编辑场馆
+//type EditChamberReq struct {
+//	Chamber Chamber
+//
+//}
+//type EditChamberResp struct {
+//}

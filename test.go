@@ -16,32 +16,6 @@ import (
 	"time"
 )
 
-type CrmTagGroup struct {
-	Id         int64     `gorm:"id" json:"id"`                  // ID
-	Name       string    `gorm:"name" json:"name"`              // 标签组名
-	CreateTime time.Time `gorm:"create_time" json:"createTime"` // 创建时间
-	UpdateTime time.Time `gorm:"update_time" json:"updateTime"` // 更新时间
-	Role       int8      `gorm:"role" json:"role"`              // 角色
-	OpId       string    `gorm:"op_id" json:"opId"`             // 操作人accountID
-	Deleted    int8      `gorm:"deleted" json:"deleted"`        // 软删状态
-}
-type CrmTags struct {
-	Id         int64     `gorm:"id" json:"id"` // ID
-	Name       string    `gorm:"name" json:"name"`
-	CreateTime time.Time `gorm:"create_time" json:"createTime"`  // 创建时间
-	UpdateTime time.Time `gorm:"update_time" json:"updateTime"`  // 更新时间
-	TagGroupId int64     `gorm:"tag_group_id" json:"tagGroupId"` // 标签组id
-	Deleted    int64     `gorm:"deleted" json:"deleted"`         // 软删状态
-	OpId       string    `gorm:"op_id" json:"opId"`              // 操作人accountID
-}
-
-func (CrmTags) TableName() string {
-	return "tblCrmTags"
-}
-func (CrmTagGroup) TableName() string {
-	return "tblCrmTagGroup"
-}
-
 func initMySql() (client *gorm.DB, err error) {
 	client, err = gorm.Open(mysql.Open("root:123456789@(127.0.0.1)/test?charset=utf8&parseTime=True&loc=Local"), &gorm.Config{})
 	if err != nil {
@@ -70,35 +44,10 @@ func RandString(len int) string {
 	return string(bytes)
 }
 
-type PassWordResetReq struct {
-	OpUid     int64  `json:"opUid"`
-	Uid       int64  `json:"uid"`
-	PassWord  string `json:"passWord"`
-	Timestamp int64  `json:"_timestamp"`
-	Nonce     string `json:"_nonce"` //8位长度的随机字符串
-	Sign      string `json:"_sign"`  //基于_timestamp和_nonce计算出来的签名
-}
-
 func PrefixMatch(name string, target string) bool {
 	reg := `^` + name + `[0-9]*$`
 	rgx := regexp.MustCompile(reg)
 	return rgx.MatchString(target)
-}
-
-func GetRandomPassWord() string {
-	//password := ""
-	//rand.Seed(time.Now().UnixNano())
-	//for i := 0; i < 6; i++ {
-	//	password += strconv.Itoa(rand.Intn(9))
-	//}
-	//return password
-	rand.Seed(time.Now().UnixNano())
-	//r := rand.New(rand.NewSource(time.Now().UnixNano()))
-	return fmt.Sprintf("%06v", rand.Int31n(100000))
-	//return strconv.Itoa(int(rand.Int31()))
-
-	//passWord := rand.New(rand.NewSource(time.Now().UnixNano())).Int31n(1000000)
-	//return strconv.Itoa(int(passWord))
 }
 
 func AuthReplace(origin string, target string) string {
@@ -107,70 +56,26 @@ func AuthReplace(origin string, target string) string {
 	return rgx.ReplaceAllString(origin+",", "")
 }
 
-type ID int64
-
-type Role struct {
-	RoleId     int64                  `gorm:"role_id;primaryKey;autoIncrement"  json:"RoleId"`     // 角色id
-	OriRoleId  int64                  `gorm:"ori_role_id"                       json:"oriRoleId"`  // 来源id，即内部系统的角色id，仅默认角色存在来源id
-	RoleName   string                 `gorm:"role_name"                         json:"roleName"`   // 角色名称
-	RoleMenu   RoleMenu1              `gorm:"role_menu"                         json:"role_menu"`  // 角色名称
-	RoleRemark map[string]interface{} `gorm:"role_remark"                       json:"roleRemark"` // 角色描述
-	SchoolId   []int64                `gorm:"school_id"                         json:"schoolId"`   // 学校id
-	Id         ID                     `gorm:"id"                         json:"id"`                // 学校id
-	//RoleType   int8   `gorm:"role_type"                         json:"roleType"`   // 1: 默认 2:普通
-	//RoleStatus int8   `gorm:"role_status"                       json:"roleStatus"` // 1:正常 2:关闭 3:删除
-	//OpUid      int64  `gorm:"op_uid"                            json:"opUid"`      // 操作人uid
-	//CreateTime int64  `gorm:"create_time"                      json:"createTime"`  // 创建时间
-	//UpdateTime int64  `gorm:"update_time"                      json:"updateTime"`  // 更新时间
-}
-
-type RoleMenu1 struct {
-	Id int64 `gorm:"id"           json:"id"` // 自增id
-	//RoleId     int64  `gorm:"role_id"      json:"roleId"`    // 角色id
-	//MenuId     int64  `gorm:"menu_id"      json:"menuId"`    // 菜单id
-	Opids string `gorm:"opids"        json:"opids"` // 菜单操作权限， 空则表示拥有所有操作权限  [1,2,3]
-	//Status     int8   `gorm:"status"       json:"status"`    // 1:正常 2:删除
-	//OpUid      int64  `gorm:"op_uid"       json:"opUid"`     // 操作人uid
-	//CreateTime int64  `gorm:"create_time" json:"createTime"` // 创建时间
-	//UpdateTime int64  `gorm:"update_time" json:"updateTime"` // 更新时间
-}
-
-func AuthMatch(origin string, target string) bool {
-	reg := `.*` + origin + "," + `.*`
-	rgx := regexp.MustCompile(reg)
-	return rgx.MatchString(target + ",")
-}
-
-type Unit struct {
-	//UnitId       int     `json:"unitId"`
-	//UnitName     string `json:"unitName"`
-	//BusinessType int8   `json:"businessType"`
-	Selected bool `json:"selected"`
-	// 办学性质
-}
-
-//type TreeResp struct {
-//	DepartmentList []*DeptBase `json:"departmentList"`
-//}
-//type DeptBase struct {
-//	DepartmentId       int64      `json:"departmentId"`
-//	ParentDepartmentId int64       `json:"parentDepartmentId"`
-//	Level              int         `json:"level"`
-//	Children           []*DeptBase `json:"children"`
-//}
-type DepartmentBase struct {
-	DepartmentId       int64             `json:"departmentId"`
-	ParentDepartmentId int64             `gorm:"column:parent_department_id;default:0;NOT NULL"` // 父级部门
-	Level              int               `gorm:"-" json:"level"`                                 // 部门层级
-	Children           []*DepartmentBase `json:"children"`
+type User struct {
+	Id         int64  `gorm:"id"           json:"id"`         // 自增id
+	Uid        int64  `gorm:"uid"          json:"uid"`        // 用户id
+	Uname      string `gorm:"uname"        json:"uname"`      // 姓名
+	UnamePing  string `gorm:"uname_ping"   json:"unamePing"`  // 全拼用户名
+	Account    string `gorm:"account"      json:"account"`    // 账号
+	SchoolId   int64  `gorm:"school_id"    json:"schoolId"`   // 学校id
+	UserType   int8   `gorm:"user_type"    json:"userType"`   // 1:老师 2:学生 3:家长,4.管理员，5.上级单位领导
+	UserStatus int8   `gorm:"user_status"  json:"userStatus"` // 1:正常 2:关闭 3:删除
+	Gender     int8   `gorm:"gender"       json:"gender"`     // 1:男 2:女
+	OpUid      int64  `gorm:"op_uid"       json:"opUid"`      // 操作人uid
+	CreateTime int64  `gorm:"create_time"  json:"createTime"` // 创建时间
+	UpdateTime int64  `gorm:"update_time"  json:"updateTime"` // 更新时间
+	Icon       string `gorm:"icon"         json:"icon"`       // 用户头像
+	Phone      string `gorm:"phone"        json:"phone"`      // 手机号
 }
 
 func main() {
-	fmt.Println(20011 % 16)
-	////fmt.Println(1424590771167718592 % 16)
-	//fmt.Println(math.Sqrt(1430142863001258348))
-	//fmt.Println(math.Pow(2, 31))
-	//fmt.Println(16000/22/12)
+	fmt.Println(50011 % 16)
+	fmt.Println(50012 % 16)
 
 	//db, _ := initMySql()
 	//
@@ -331,7 +236,7 @@ func main() {
 	//// 开始迁移转换
 	//err := t2t.
 	//	// 指定某个表,如果不指定,则默认全部表都迁移
-	//	Table("tblUserOrganization").
+	//	Table("tblChamber").
 	//	//Table("tblUserDataAuthority0").
 	//	// 表前缀
 	//	//Prefix("prefix_").
@@ -344,9 +249,9 @@ func main() {
 	//	// 是否添加结构体方法获取表名
 	//	RealNameMethod("TableName").
 	//	// 生成的结构体保存路径
-	//	SavePath("/Users/zyb/Desktop/test/sql").
+	//	SavePath("/Users/zyb/Desktop/test/text.txt").
 	//	// 数据库dsn,这里可以使用 t2t.DB() 代替,参数为 *sql.DB 对象
-	//	Dsn("homework:homework@tcp(mysql.basic.suanshubang.com:13309)/hxx_unit?charset=utf8").
+	//	Dsn("homework:homework@tcp(mysql.basic.suanshubang.com:13309)/hxx_school?charset=utf8").
 	//	// 执行
 	//	Run()
 	//
