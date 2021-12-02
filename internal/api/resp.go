@@ -174,4 +174,5 @@ func X() {
 	}
 	fmt.Println()
 	fmt.Println(163 / math.Pow(1.04, 7))
+	fmt.Println(42 * math.Pow(1.04, 7))
 }

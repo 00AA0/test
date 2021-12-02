@@ -73,9 +73,19 @@ type User struct {
 	Phone      string `gorm:"phone"        json:"phone"`      // 手机号
 }
 
+// target 只有 数字、- 字符
+func Match(target string) bool {
+	reg := `^[0-9\-]+$`
+	rgx, _ := regexp.Compile(reg)
+	return rgx.MatchString(target)
+}
+
 func main() {
 	fmt.Println(50011 % 16)
 	fmt.Println(50012 % 16)
+
+	match := Match("1-1")
+	fmt.Println(match)
 
 	//db, _ := initMySql()
 	//
