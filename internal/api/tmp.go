@@ -21,7 +21,7 @@ func (h *MyEventHandler) String() string {
 	return "MyEventHandler"
 }
 
-func startCanal() {
+func StartCanal() {
 	cfg := canal.NewDefaultConfig()
 	cfg.Addr = "127.0.0.1:3306"
 	cfg.User = "root"

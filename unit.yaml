@@ -1,0 +1,89 @@
+
+menu:
+  #  角色
+  /unitui/auth/getbaseinfo:
+    - "该接口不鉴权"
+  /unitui/device/tracking:
+    - "该接口不鉴权"
+  # 查看
+  /unitui/auth/getrolelist:
+    - "100111"
+  # 成员
+  /unitui/auth/getroleuserlist:
+    - "100112"
+  # 和成员关联
+  /unitui/auth/delroleuser:
+    - "100112"
+  # 编辑
+  /unitui/auth/editrole:
+    - "100113"
+  # 和编辑关联
+  /unitui/auth/getroleinfo:
+    - "100113"
+  # 启用
+  /unitui/auth/startusingrole:
+    - "100114"
+  # 停用
+  /unitui/auth/stopusingrole:
+    - "100115"
+  # 删除
+  /unitui/auth/deleterole:
+    - "100116"
+  # 添加角色
+  /unitui/auth/addrole:
+    - "100117"
+  # 和添加角色关联
+  /unitui/auth/getmenutree:
+    - "100117"
+
+  #  用户
+  # 查看
+  /unitui/auth/getuserlist:
+    - "100121"
+  # 分配
+  /unitui/auth/allotuserrole:
+    - "1001215"
+  # 和分配关联
+  /unitui/auth/allotuserroleinfo:
+    - "1001215"
+  # 删除
+  /unitui/user/deluser:
+    - "100126"
+  # 重置密码
+  /unitui/user/setpasswd:
+    - "100128"
+  # 批量配置权限
+  /unitui/auth/allotuserrolebatch:
+    - "100129"
+  # 和批量配置权限关联
+  /unitui/auth/allotuserrolebatchinfo:
+    - "100129"
+
+  #  单位
+  # 查看
+  /unitui/unit/getunitinfo:
+    - "100211"
+
+  #  人员
+  # 查看
+  /unitui/user/managelist:
+    - "100121"
+  # 编辑
+  /unitui/user/update:
+    - "1001215"
+  # 和编辑关联
+  /unitui/user/detail:
+    - "1001215"
+  # 删除
+  /unitui/user/deluser:
+    - "100126"
+  # 新增
+  /unitui/user/add:
+    - "100128"
+#  # 批量配置权限
+#  /unitui/auth/allotuserrolebatch:
+#    - "100129"
+#  # 和批量配置权限关联
+#  /unitui/auth/allotuserrolebatchinfo:
+#    - "100129"
+

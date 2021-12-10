@@ -1,252 +1,270 @@
-menuAuthMap:
-  - authId: '1'
-    uri: ''
-    api: ''
-    idName: 查看
-  - authId: '2'
-    uri: ''
-    api: ''
-    idName: 成员
-  - authId: '3'
-    uri: ''
-    api: ''
-    idName: 编辑
-  - authId: '4'
-    uri: ''
-    api: ''
-    idName: 启用
-  - authId: '5'
-    uri: ''
-    api: ''
-    idName: 停用
-  - authId: '6'
-    uri: ''
-    api: ''
-    idName: 删除
-  - authId: '7'
-    uri: ''
-    api: ''
-    idName: 添加角色
-  - authId: '8'
-    uri: ''
-    api: ''
-    idName: 重置密码
-  - authId: '9'
-    uri: ''
-    api: ''
-    idName: 添加用户
-  - authId: '10'
-    uri: ''
-    api: ''
-    idName: 批量配置权限
-  - authId: '11'
-    uri: ''
-    api: ''
-    idName: 添加老师
-  - authId: '12'
-    uri: ''
-    api: ''
-    idName: 批量导入
-  - authId: '13'
-    uri: ''
-    api: ''
-    idName: 添加班级
-  - authId: '14'
-    uri: ''
-    api: ''
-    idName: 导入学生
-  - authId: '15'
-    uri: ''
-    api: ''
-    idName: 添加学生
-  - authId: '16'
-    uri: ''
-    api: ''
-    idName: 导入班级
-  - authId: '17'
-    uri: ''
-    api: ''
-    idName: 学校导入学生
-  - authId: '18'
-    uri: ''
-    api: ''
-    idName: 添加成员
-  - authId: '19'
-    uri: ''
-    api: ''
-    idName: 创建
-  - authId: '20'
-    uri: ''
-    api: ''
-    idName: 转移
-  - authId: '21'
-    uri: ''
-    api: ''
-    idName: 添加
-roleMap:
-  '101':
-    roleId: 101
-    roleName: 管理员
-    authList:
-      '10011':
-        - '100111'
-        - '100112'
-        - '100113'
-        - '100114'
-        - '100115'
-        - '100116'
-        - '100117'
-      '10012':
-        - '100121'
-        - '100128'
-        - '100123'
-        - '100126'
-        - '1001210'
-      '10021':
-        - '100211'
-      '10031':
-        - '100311'
-        - '100313'
-        - '100316'
-        - '1003121'
-        - '1003112'
-      '10032':
-        - '100321'
-        - '100323'
-        - '100326'
-        - '1003218'
-        - '1003219'
-        - '100324'
-        - '100325'
-        - '1003220'
-      '10041':
-        - '100411'
-        - '100413'
-        - '100416'
-        - '1004113'
-        - '1004116'
-      '10042':
-        - '100421'
-        - '100423'
-        - '100426'
-        - '1004212'
-        - '1004215'
-      '10043':
-        - '100431'
-  '102':
-    roleId: 102
-    roleName: 普通用户
-    authList:
-      '10021':
-        - '100211'
-      '10031':
-        - '100311'
-        - '100313'
-        - '100316'
-        - '1003121'
-        - '1003112'
-      '10032':
-        - '100321'
-        - '100323'
-        - '100326'
-        - '1003218'
-        - '1003219'
-        - '100324'
-        - '100325'
-        - '1003220'
-      '10041':
-        - '100411'
-        - '100413'
-        - '100416'
-        - '1004113'
-        - '1004116'
-      '10042':
-        - '100421'
-        - '100423'
-        - '100426'
-        - '1004212'
-        - '1004215'
-      '10043':
-        - '100431'
-menuMap:
-  - title: 权限管理
-    menuId: '1001'
-    subMenu:
-      - title: 角色管理
-        menuId: '10011'
-        uri: '/authority/role'
-        authList:
-          - '100111'
-          - '100112'
-          - '100113'
-          - '100114'
-          - '100115'
-          - '100116'
-          - '100117'
-      - title: 用户管理
-        menuId: '10012'
-        uri: '/authority/user'
-        authList:
-          - '100121'
-          - '100128'
-          - '100123'
-          - '100126'
-          - '1001210'
-  - title: 学校管理
-    menuId: '1002'
-    subMenu:
-      - title: 学校管理
-        menuId: '10021'
-        uri: '/school/manage'
-        authList:
-          - '100211'
-  - title: 组织管理
-    menuId: '1003'
-    subMenu:
-      - title: 教职工管理
-        menuId: '10031'
-        uri: '/organization/teacher'
-        authList:
-          - '100311'
-          - '100313'
-          - '100316'
-          - '1003121'
-          - '1003112'
-      - title: 部门管理
-        menuId: '10032'
-        uri: '/organization/department'
-        authList:
-          - '100321'
-          - '100323'
-          - '100326'
-          - '1003218'
-          - '1003219'
-          - '100324'
-          - '100325'
-          - '1003220'
-  - title: 学生管理
-    menuId: '1004'
-    subMenu:
-      - title: 班级管理
-        menuId: '10041'
-        uri: '/student/class'
-        authList:
-          - '100411'
-          - '100413'
-          - '100416'
-          - '1004113'
-          - '1004116'
-      - title: 学生管理
-        menuId: '10042'
-        uri: '/student/student'
-        authList:
-          - '100421'
-          - '100423'
-          - '100426'
-          - '1004212'
-          - '1004215'
-      - title: 设备管理
-        menuId: '10043'
-        uri: '/student/device'
-        authList:
-          - '100431'
+menu:
+  #  角色
+  /schui/auth/getbaseinfo:
+    - "该接口不鉴权"
+  /schui/device/tracking:
+    - "该接口不鉴权"
+  # 查看
+  /schui/auth/getrolelist:
+    - "100111"
+  # 成员
+  /schui/auth/getroleuserlist:
+    - "100112"
+  # 和成员关联
+  /schui/auth/delroleuser:
+    - "100112"
+  # 编辑
+  /schui/auth/editrole:
+    - "100113"
+  # 和编辑关联
+  /schui/auth/getroleinfo:
+    - "100113"
+  # 启用
+  /schui/auth/startusingrole:
+    - "100114"
+  # 停用
+  /schui/auth/stopusingrole:
+    - "100115"
+  # 删除
+  /schui/auth/deleterole:
+    - "100116"
+  # 添加角色
+  /schui/auth/addrole:
+    - "100117"
+  # 和添加角色关联
+  /schui/auth/getmenutree:
+    - "100117"
+
+  #  用户
+  # 查看
+  /schui/auth/getuserlist:
+    - "100121"
+  # 编辑
+  /schui/auth/edituser:
+    - "100123"
+  # 和编辑关联
+  /schui/auth/edituserinfo:
+    - "100123"
+  # 删除
+  /schui/auth/deluser:
+    - "100126"
+  # 重置密码
+  /schui/auth/setpasswd:
+    - "100128"
+  # 添加用户
+  /schui/auth/adduser:
+    - "100129"
+  # 和添加用户关联
+  /schui/auth/adduserinfo:
+    - "100129"
+  # 和添加用户关联
+  /schui/user/checkping:
+    - "100129"
+  # 批量配置权限
+  /schui/auth/edituserbatch:
+    - "1001210"
+  # 和批量配置权限关联
+  /schui/auth/edituserinfos:
+    - "1001210"
+
+
+  #  学校
+  # 查看
+  /schui/school/detail:
+    - "100211"
+
+
+  #  老师
+  # 查看
+  /schui/teacher/managelist:
+    - "100221"
+  # 编辑
+  /schui/teacher/update:
+    - "100223"
+  # 和编辑关联
+  /schui/teacher/detail:
+    - "100223"
+  # 删除
+  /schui/teacher/del:
+    - "100226"
+  # 添加老师
+  /schui/teacher/add:
+    - "1002211"
+  # 批量导入
+  /schui/teacher/batchadd:
+    - "1002212"
+
+
+  #  班级
+  # 查看
+  /schui/class/list:
+    - "100231"
+  # 和查看关联
+  /schui/school/grade/list:
+    - "100231"
+  # 和查看关联
+  /schui/school/subjectList:
+    - "100231"
+  # 编辑
+  /schui/class/update:
+    - "100233"
+  # 和编辑关联
+  /schui/class/detail:
+    - "100233"
+  # 和编辑关联
+  /schui/class/stulist:
+    - "100233"
+  # 删除
+  /schui/class/del:
+    - "100236"
+  # 添加班级
+  /schui/class/add:
+    - "1002313"
+  # 和编辑，添加班级关联
+  /schui/teacher/list:
+    - "100233"
+    - "1002313"
+  /schui/stu/batchadd:
+    - "1002314"
+
+  # 学生
+  /schui/stu/managelist:
+    - "100241"
+  # 编辑
+  /schui/stu/update:
+    - "100243"
+  # 和编辑关联
+  /schui/stu/detail:
+    - "100243"
+  # 和编辑关联
+  /schui/class/baselist:
+    - "100243"
+  # 删除
+  /schui/stu/del:
+    - "100246"
+  # 添加学生
+  /schui/stu/add:
+    - "1002415"
+  # 学生管理批量导入学校下学生
+  /schui/stu/importall:
+    - "1002417"
+
+
+  # 设备
+  /schui/device/checkstation:
+    - "100251"
+  /schui/device/bindstation:
+    - "100251"
+  /schui/device/unbindstation:
+    - "100251"
+  /schui/device/rebindstation:
+    - "100251"
+  /schui/device/syndevice:
+    - "100251"
+  /schui/device/binddevice:
+    - "100251"
+  /schui/device/setnamestatus:
+    - "100251"
+  /schui/device/setbindstatus:
+    - "100251"
+  /schui/device/stationlist:
+    - "100251"
+  /schui/device/devicelist:
+    - "100251"
+
+  # 部门
+  # 查看
+  /schui/department/tree:
+    - "100311"
+  /schui/department/detail:
+    - "100311"
+    - "100313"
+  /schui/department/teacherlist:
+    - "100311"
+    - "100313"
+  /schui/department/unassigneduserlist:
+    - "100311"
+  /schui/department/sublist:
+    - "100311"
+  # 编辑, 转移
+  /schui/department/update:
+    - "100313"
+    - "1003120"
+  # 创建部门
+  /unitui/department/add:
+    - "1003119"
+  # 添加成员
+  /unitui/department/adduser:
+    - "1003118"
+  # 启用
+  /schui/department/setstatus:
+    - "100311"
+  # 停用
+  /schui/department/setstatus:
+    - "100311"
+  /schui/department/setstatus:
+    - "100311"
+
+  "100311",查看
+  "100313",编辑
+  "100316",删除
+  "1003118",添加成员
+  "1003119",创建
+  "100314",启用
+  "100315",停用
+  "1003120"转移
+
+#  deptGroup.GET("/sublist", classflow.UseController(new(department.SubListController)))                        //子部门列表
+#  deptGroup.GET("/teacherlist", classflow.UseController(new(department.TeacherListController)))                //部门成员列表
+#  deptGroup.POST("/addteacher", classflow.UseController(new(department.AddTeacherController)))                 //添加部门成员
+#  deptGroup.GET("/tree", classflow.UseController(new(department.TreeController)))                              //部门树
+  deptGroup.POST("/updateteacherdept", classflow.UseController(new(department.UpdateTeacherDeptController)))   //编辑老师部门信息
+#  deptGroup.GET("/detail", classflow.UseController(new(department.DetailController)))                          //部门详情
+  deptGroup.POST("/setstatus", classflow.UseController(new(department.SetStatusController)))                   //设置部门状态
+#  deptGroup.POST("/update", classflow.UseController(new(department.UpdateController)))                         //修改部门
+#  deptGroup.POST("/add", classflow.UseController(new(department.AddController)))                               //添加部门
+#  deptGroup.POST("/unassigneduserlist", classflow.UseController(new(department.UnassignedUserListController))) //部门未分配人员
+
+  # 场馆
+  # 查看
+  /schui/chamber/list:
+    - "100271"
+  # 新增
+  /schui/chamber/add:
+    - "1002721"
+  /schui/chamber/addinfo:
+    - "1002721"
+  # 编辑
+  /schui/chamber/edit:
+    - "100273"
+  /schui/chamber/editinfo:
+    - "100273"
+  # 删除
+  /schui/chamber/del:
+    - "100276"
+  # 批量导入
+  /schui/chamber/batchadd:
+    - "1002712"
+  # 家长
+  # 查看
+  /schui/parent/managelist:
+    - "100251"
+  schui/class/gradetoclass:
+    - "100251"
+  # 新增
+  /schui/parent/add:
+    - "1002522"
+  # 编辑
+  /schui/parent/update:
+    - "100253"
+  /schui/parent/info:
+    - "100253"
+  # 删除
+  /schui/parent/unbound:
+    - "100256"
+  # 批量导入
+  /schui/parent/batchadd:
+    - "1002512"
+  /schui/stu/getstubydimname:
+    - "100253"
+    - "1002522"

@@ -81,11 +81,14 @@ func Match(target string) bool {
 }
 
 func main() {
-	fmt.Println(50011 % 16)
-	fmt.Println(50012 % 16)
+	fmt.Println(500457 % 16)
+	fmt.Println(100000019389 % 16)
+	fmt.Println(100000032008 % 16)
+	fmt.Println(320125 % 16)
+	fmt.Println(4294967296 / 2)
 
-	match := Match("1-1")
-	fmt.Println(match)
+	//fmt.Println(13*4*215)
+	//fmt.Println(60*60*60)
 
 	//db, _ := initMySql()
 	//

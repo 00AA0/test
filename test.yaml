@@ -1,101 +1,212 @@
-
-
-
-  张鹏 撤回了一条消息
-
-    看下这个错误正常吗
-    现在应该没问题了
-
-    base环境的代码更新了吗
-    更新了
-
-    👌
-
-    60032
-
-    {"level":"INFO","time":"2021-09-27 17:44:03.113514","file":"middleware/accesslog.go:141","msg":"notice","logId":"2634071619","requestId":"a213a26a6fa61fa2:3bc03eff15549c91:a213a26a6fa61fa2:1","module":"sch","localIp":"10.112.91.214","uri":"/sch/auth/addadminuser","cuid":"","device":"","channel":"","os":"","vc":"","vcname":"","userid":"","host":"sch-svc","method":"POST","httpProto":"HTTP/1.1","handle":"git.zuoyebang.cc/huixuexi/classflow.UseController.func1","userAgent":"Go-http-client/1.1","refer":"","clientIp":"","cookie":"","requestStartTime":"1632735840.91932","requestEndTime":"1632735843.113496","cost":3021.56,"requestParam":"{\"opUid\":2578981388,\"schoolCode\":\"ce9983jdjd\",\"schoolId\":60124,\"uname\":\"hhhh\"}","responseStatus":200,"response":"{\"errNo\":-1,\"errMsg\":\"giving up after 3 attempt(s): Post \\\"http://zhike-wxm-cc.suanshubang.cc/hxx-passport/api/userRegister\\\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)\",\"data\":{}}","bodySize":213,"reqErr":"","globalCustomerNotice":"sch"}
-
-    {"level":"ERROR","time":"2021-09-28 14:21:40.323842","file":"layer/flow.go:191","msg":"FlowLog_Error_Api_CreateAdminAccountService_Common_CallerFunc[hxx-mis/service/school.(*CreateAdminAccountService).CreateAdminAccount:25]:adminInfo is empty struct on schoolId:60132, account:xuzhongchuang","logId":"1300298034","requestId":"2084e389b4c982f5:2084e389b4c982f5:0:1","module":"hxx-mis","localIp":"10.112.91.237","uri":"/hxx-mis/schools/createAdminAccount"}
-    {"level":"ERROR","time":"2021-09-28 14:21:40.323881","file":"layer/flow.go:138","msg":"FlowLog_Error_Controller_CreateAdminAccountController_LogicErr_CallerFunc[git.zuoyebang.cc/huixuexi/classflow.UseController.func1:54]:Controller CreateAdminAccountController call action logic error, err:创建管理员失败","logId":"1300298034","requestId":"2084e389b4c982f5:2084e389b4c982f5:0:1","module":"hxx-mis","localIp":"10.112.91.237","uri":"/hxx-mis/schools/createAdminAccount"}
-    {"level":"ERROR","time":"2021-09-28 14:21:40.559424","file":"layer/flow.go:191","msg":"FlowLog_Error_Api_CreateAdminAccountService_Common_CallerFunc[hxx-mis/service/school.(*CreateAdminAccountService).CreateAdminAccount:25]:adminInfo is empty struct on schoolId:60132, account:xuzhongchuang","logId":"1300532470","requestId":"b9938e317f3e56a:b9938e317f3e56a:0:1","module":"hxx-mis","localIp":"10.112.91.237","uri":"/hxx-mis/schools/createAdminAccount"}
-    {"level":"ERROR","time":"2021-09-28 14:21:40.559449","file":"layer/flow.go:138","msg":"FlowLog_Error_Controller_CreateAdminAccountController_LogicErr_CallerFunc[git.zuoyebang.cc/huixuexi/classflow.UseController.func1:54]:Controller CreateAdminAccountController call action logic error, err:创建管理员失败","logId":"1300532470","requestId":"b9938e317f3e56a:b9938e317f3e56a:0:1","module":"hxx-mis","localIp":"10.112.91.237","uri":"/hxx-mis/schools/createAdminAccount"}
-    {"level":"ERROR","time":"2021-09-28 14:21:54.088548","file":"layer/flow.go:191","msg":"FlowLog_Error_Api_CreateAdminAccountService_Common_CallerFunc[hxx-mis/service/school.(*CreateAdminAccountService).CreateAdminAccount:25]:adminInfo is empty struct on schoolId:60132, account:xuzhongchuang","logId":"1314067736","requestId":"a513e5e008db91e7:a513e5e008db91e7:0:1","module":"hxx-mis","localIp":"10.112.91.237","uri":"/hxx-mis/schools/createAdminAccount"}
-    {"level":"ERROR","time":"2021-09-28 14:21:54.088578","file":"layer/flow.go:138","msg":"FlowLog_Error_Controller_CreateAdminAccountController_LogicErr_CallerFunc[git.zuoyebang.cc/huixuexi/classflow.UseController.func1:54]:Controller CreateAdminAccountController call action logic error, err:创建管理员失败","logId":"1314067736","requestId":"a513e5e008db91e7:a513e5e008db91e7:0:1","module":"hxx-mis","localIp":"10.112.91.237","uri":"/hxx-mis/schools/createAdminAccount"}
-    {"level":"ERROR","time":"2021-09-28 14:22:39.407327","file":"layer/flow.go:191","msg":"FlowLog_Error_Api_CreateAdminAccountService_Common_CallerFunc[hxx-mis/service/school.(*CreateAdminAccountService).CreateAdminAccount:25]:adminInfo is empty struct on schoolId:60132, account:xuzhongchuang","logId":"1359383124","requestId":"b34198ffbda45d1e:b34198ffbda45d1e:0:1","module":"hxx-mis","localIp":"10.112.91.237","uri":"/hxx-mis/schools/createAdminAccount"}
-    {"level":"ERROR","time":"2021-09-28 14:22:39.407353","file":"layer/flow.go:138","msg":"FlowLog_Error_Controller_CreateAdminAccountController_LogicErr_CallerFunc[git.zuoyebang.cc/huixuexi/classflow.UseController.func1:54]:Controller CreateAdminAccountController call action logic error, err:创建管理员失败","logId":"1359383124","requestId":"b34198ffbda45d1e:b34198ffbda45d1e:0:1","module":"hxx-mis","localIp":"10.112.91.237","uri":"/hxx-mis/schools/createAdminAccount"}
-    {"level":"ERROR","time":"2021-09-28 14:34:00.55627","file":"layer/flow.go:191","msg":"FlowLog_Error_Api_CreateAdminAccountService_Common_CallerFunc[hxx-mis/service/school.(*CreateAdminAccountService).CreateAdminAccount:25]:adminInfo is empty struct on schoolId:60134, account:sdfdsfsd","logId":"2040527045","requestId":"5a937219284a4f60:5a937219284a4f60:0:1","module":"hxx-mis","localIp":"10.112.91.237","uri":"/hxx-mis/schools/createAdminAccount"}
-    {"level":"ERROR","time":"2021-09-28 14:34:00.556321","file":"layer/flow.go:138","msg":"FlowLog_Error_Controller_CreateAdminAccountController_LogicErr_CallerFunc[git.zuoyebang.cc/huixuexi/classflow.UseController.func1:54]:Controller CreateAdminAccountController call action logic error, err:创建管理员失败","logId":"2040527045","requestId":"5a937219284a4f60:5a937219284a4f60:0:1","module":"hxx-mis","localIp":"10.112.91.237","uri":"/hxx-mis/schools/createAdminAccount"}
-
-  tt= tp=module.log {"level":"DEBUG","time":"2021-10-11 18:20:21.782054","file":"base/http.go:365","msg":"http post request","logId":"1221629863","requestId":"9910882a59cffd66:9910882a59cffd66:0:1","module":"hxx-mis","localIp":"10.112.96.133","uri":"/hxx-mis/schools/createAdminAccount","url":"http://sch-svc:8080/sch/auth/addadminuser","params":"{\"opUid\":2458350276,\"schoolCode\":\"zjdzh\",\"schoolId\":200002,\"uname\":\"zjdzh\"}","responseCode":200,"responseBody":"{\"errNo\":-1,\"errMsg\":\"Error 1062: Duplicate entry '100000011468' for key 'idx_uid'\",\"data\":{}}"}
-
-    19:08
-  menuAuthMap:
-    - authId: '1'
-      uri: ''
-      api: ''
-      idName: 查看
-    - authId: '2'
-      uri: ''
-      api: ''
-      idName: 成员
-    - authId: '3'
-      uri: ''
-      api: ''
-      idName: 编辑
-    - authId: '4'
-      uri: ''
-      api: ''
-      idName: 启用
-    - authId: '5'
-      uri: ''
-      api: ''
-      idName: 停用
-    - authId: '6'
-      uri: ''
-      api: ''
-      idName: 删除
-    - authId: '7'
-      uri: ''
-      api: ''
-      idName: 添加角色
-    - authId: '8'
-      uri: ''
-      api: ''
-      idName: 重置密码
-    - authId: '9'
-      uri: ''
-      api: ''
-      idName: 添加用户
-    - authId: '10'
-      uri: ''
-      api: ''
-      idName: 批量配置权限
-    - authId: '11'
-      uri: ''
-      api: ''
-      idName: 添加老师
-    - authId: '12'
-      uri: ''
-      api: ''
-      idName: 批量导入
-    - authId: '13'
-      uri: ''
-      api: ''
-      idName: 添加班级
-    - authId: '14'
-      uri: ''
-      api: ''
-      idName: 导入学生
-    - authId: '15'
-      uri: ''
-      api: ''
-      idName: 添加学生
-  roleMap:
-    '101':
-      roleId: 101
-      roleName: 管理员
-      authList:
-        '10011':
+menuAuthMap:
+  - authId: '1'
+    uri: ''
+    api: ''
+    idName: 查看
+  - authId: '2'
+    uri: ''
+    api: ''
+    idName: 成员
+  - authId: '3'
+    uri: ''
+    api: ''
+    idName: 编辑
+  - authId: '4'
+    uri: ''
+    api: ''
+    idName: 启用
+  - authId: '5'
+    uri: ''
+    api: ''
+    idName: 停用
+  - authId: '6'
+    uri: ''
+    api: ''
+    idName: 删除
+  - authId: '7'
+    uri: ''
+    api: ''
+    idName: 添加角色
+  - authId: '8'
+    uri: ''
+    api: ''
+    idName: 重置密码
+  - authId: '9'
+    uri: ''
+    api: ''
+    idName: 添加用户
+  - authId: '10'
+    uri: ''
+    api: ''
+    idName: 批量配置权限
+  - authId: '11'
+    uri: ''
+    api: ''
+    idName: 添加老师
+  - authId: '12'
+    uri: ''
+    api: ''
+    idName: 批量导入
+  - authId: '13'
+    uri: ''
+    api: ''
+    idName: 添加班级
+  - authId: '14'
+    uri: ''
+    api: ''
+    idName: 导入学生
+  - authId: '15'
+    uri: ''
+    api: ''
+    idName: 添加学生
+  - authId: '16'
+    uri: ''
+    api: ''
+    idName: 导入班级
+  - authId: '17'
+    uri: ''
+    api: ''
+    idName: 批量导入
+  - authId: '18'
+    uri: ''
+    api: ''
+    idName: 添加成员
+  - authId: '19'
+    uri: ''
+    api: ''
+    idName: 创建
+  - authId: '20'
+    uri: ''
+    api: ''
+    idName: 转移
+  - authId: '21'
+    uri: ''
+    api: ''
+    idName: 添加
+  - authId: '22'
+    uri: ''
+    api: ''
+    idName: 添加家长
+roleMap:
+  '101':
+    roleId: 101
+    roleName: 管理员
+    authList:
+      '10011':
+        - '100111'
+        - '100112'
+        - '100113'
+        - '100114'
+        - '100115'
+        - '100116'
+        - '100117'
+      '10012':
+        - '100121'
+        - '100128'
+        - '100123'
+        - '100126'
+        - '1001210'
+      '10021':
+        - '100211'
+        - '100213'
+      '10022':
+        - '100221'
+        - '100223'
+        - '100226'
+        - '1002211'
+        - '1002212'
+      '10023':
+        - '100231'
+        - '100233'
+        - '100236'
+        - '1002313'
+        - '1002316'
+        - '1002314'
+      '10024':
+        - '100241'
+        - '100243'
+        - '100246'
+        - '1002417'
+        - '1002415'
+      '10025':
+        - '100251'
+        - '100253'
+        - '100256'
+        - '1002522'
+        - '1002512'
+      '10026':
+        - '100261'
+      '10027':
+        - '100271'
+        - '100273'
+        - '100276'
+        - '1002721'
+        - '1002712'
+      '10031':
+        - '100311'
+        - '100313'
+        - '100316'
+        - '1003118'
+        - '1003119'
+        - '100314'
+        - '100315'
+        - '1003120'
+  '102':
+    roleId: 102
+    roleName: 普通用户
+    authList:
+      '10021':
+        - '100211'
+      '10022':
+        - '100221'
+        - '100223'
+        - '100226'
+        - '1002211'
+        - '1002212'
+      '10023':
+        - '100231'
+        - '100233'
+        - '100236'
+        - '1002313'
+        - '1002316'
+        - '1002314'
+      '10024':
+        - '100241'
+        - '100243'
+        - '100246'
+        - '1002417'
+        - '1002415'
+      '10025':
+        - '100251'
+        - '100253'
+        - '100256'
+        - '1002522'
+        - '1002512'
+      '10026':
+        - '100261'
+      '10027':
+        - '100271'
+        - '100273'
+        - '100276'
+        - '1002721'
+        - '1002712'
+      '10031':
+        - '100311'
+        - '100313'
+        - '100316'
+        - '1003118'
+        - '1003119'
+        - '100314'
+        - '100315'
+        - '1003120'
+menuMap:
+  - title: 权限管理
+    menuId: '1001'
+    subMenu:
+      - title: 角色管理
+        menuId: '10011'
+        uri: '/authority/role'
+        authList:
           - '100111'
           - '100112'
           - '100113'
@@ -103,182 +214,87 @@
           - '100115'
           - '100116'
           - '100117'
-        '10012':
+      - title: 用户管理
+        menuId: '10012'
+        uri: '/authority/user'
+        authList:
           - '100121'
           - '100128'
           - '100123'
           - '100126'
-          - '100129'
           - '1001210'
-        '10021':
+  - title: 档案管理
+    menuId: '1002'
+    subMenu:
+      - title: 学校管理
+        menuId: '10021'
+        uri: '/archives/school'
+        authList:
           - '100211'
-        '10022':
+          - '100213'
+      - title: 教职工管理
+        menuId: '10022'
+        uri: '/archives/teacher'
+        authList:
           - '100221'
           - '100223'
           - '100226'
           - '1002211'
           - '1002212'
-        '10023':
+      - title: 班级管理
+        menuId: '10023'
+        uri: '/archives/class'
+        authList:
           - '100231'
           - '100233'
           - '100236'
           - '1002313'
+          - '1002316'
           - '1002314'
-        '10024':
+      - title: 学生管理
+        menuId: '10024'
+        uri: '/archives/student'
+        authList:
           - '100241'
           - '100243'
           - '100246'
+          - '1002417'
           - '1002415'
-        '10025':
+      - title: 家长管理
+        menuId: '10025'
+        uri: '/archives/parent'
+        authList:
           - '100251'
-    '102':
-      roleId: 102
-      roleName: 学校管理者
-      authList:
-        '10011':
-          - '100111'
-          - '100112'
-          - '100113'
-          - '100114'
-          - '100115'
-          - '100116'
-          - '100117'
-        '10012':
-          - '100121'
-          - '100128'
-          - '100123'
-          - '100126'
-          - '100129'
-          - '1001210'
-        '10021':
-          - '100211'
-        '10022':
-          - '100221'
-          - '100223'
-          - '100226'
-          - '1002211'
-          - '1002212'
-        '10023':
-          - '100231'
-          - '100233'
-          - '100236'
-          - '1002313'
-          - '1002314'
-        '10024':
-          - '100241'
-          - '100243'
-          - '100246'
-          - '1002415'
-        '10025':
-          - '100251'
-    '103':
-      roleId: 103
-      roleName: 年级主任
-      authList:
-        '10011':
-          - '100111'
-        '10012':
-          - '100121'
-        '10021':
-          - '100211'
-        '10022':
-          - '100221'
-          - '100223'
-          - '100226'
-          - '1002211'
-          - '1002212'
-        '10023':
-          - '100231'
-          - '100233'
-          - '100236'
-          - '1002313'
-          - '1002314'
-        '10024':
-          - '100241'
-          - '100243'
-          - '100246'
-          - '1002415'
-        '10025':
-          - '100251'
-    '104':
-      roleId: 104
-      roleName: 学科组长
-      authList:
-        '10011':
-          - '100111'
-        '10012':
-          - '100121'
-        '10021':
-          - '100211'
-        '10022':
-          - '100221'
-        '10023':
-          - '100231'
-    '105':
-      roleId: 105
-      roleName: 学科老师
-      authList: { }
-  menuMap:
-    - title: 权限管理
-      menuId: '1001'
-      subMenu:
-        - title: 角色管理
-          menuId: '10011'
-          uri: '/authority/role'
-          authList:
-            - '100111'
-            - '100112'
-            - '100113'
-            - '100114'
-            - '100115'
-            - '100116'
-            - '100117'
-        - title: 用户管理
-          menuId: '10012'
-          uri: '/authority/user'
-          authList:
-            - '100121'
-            - '100128'
-            - '100123'
-            - '100126'
-            - '100129'
-            - '1001210'
-    - title: 档案管理
-      menuId: '1002'
-      subMenu:
-        - title: 学校管理
-          menuId: '10021'
-          uri: '/archives/school'
-          authList:
-            - '100211'
-        - title: 老师管理
-          menuId: '10022'
-          uri: '/archives/teacher'
-          authList:
-            - '100221'
-            - '100223'
-            - '100226'
-            - '1002211'
-            - '1002212'
-        - title: 班级管理
-          menuId: '10023'
-          uri: '/archives/class'
-          authList:
-            - '100231'
-            - '100233'
-            - '100236'
-            - '1002313'
-            - '1002314'
-        - title: 学生管理
-          menuId: '10024'
-          uri: '/archives/student'
-          authList:
-            - '100241'
-            - '100243'
-            - '100246'
-            - '1002415'
-        - title: 设备管理
-          menuId: '10025'
-          uri: '/archives/device'
-          authList:
-            - '100251'
+          - '100253'
+          - '100256'
+          - '1002522'
+          - '1002512'
+      - title: 设备管理
+        menuId: '10026'
+        uri: '/archives/device'
+        authList:
+          - '100261'
+      - title: 场馆管理
+        menuId: '10027'
+        uri: '/archives/chamber'
+        authList:
+          - '100271'
+          - '100273'
+          - '100276'
+          - '1002721'
+          - '1002712'
+  - title: 组织管理
+    menuId: '1003'
+    subMenu:
+      - title: 部门管理
+        menuId: '10031'
+        uri: '/archives/department'
+        authList:
+          - '100311'
+          - '100313'
+          - '100316'
+          - '1003118'
+          - '1003119'
+          - '100314'
+          - '100315'
+          - '1003120'

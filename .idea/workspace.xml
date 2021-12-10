@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36a8a31d-9b59-4e0a-b360-3b506852aaf7" name="Default Changelist" comment="test">
+      <change afterPath="$PROJECT_DIR$/unit.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/api/resp.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/resp.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/auth.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/api/tmp.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/tmp.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/test.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,11 +190,6 @@
           <url>file://$PROJECT_DIR$/internal/api/resp.go</url>
           <line>13</line>
           <option name="timeStamp" value="109" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/test.go</url>
-          <line>424</line>
-          <option name="timeStamp" value="110" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
