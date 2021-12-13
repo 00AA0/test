@@ -3,6 +3,7 @@ module test
 go 1.16
 
 require (
+	github.com/apache/rocketmq-client-go/v2 v2.1.0
 	github.com/casbin/casbin/v2 v2.39.0
 	github.com/garyburd/redigo v1.6.2
 	github.com/gin-gonic/gin v1.7.4
