@@ -13,6 +13,7 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
+	"test/internal/api"
 	"time"
 )
 
@@ -81,11 +82,14 @@ func Match(target string) bool {
 }
 
 func main() {
-	fmt.Println(1425353631560894592 % 16)
-	fmt.Println(100000019389 % 16)
-	fmt.Println(100000032008 % 16)
-	fmt.Println(320125 % 16)
-	fmt.Println(4294967296 / 2)
+
+	api.Goruntine()
+
+	//fmt.Println(500005 % 16)
+	//fmt.Println(100000019389 % 16)
+	//fmt.Println(100000032008 % 16)
+	//fmt.Println(320125 % 16)
+	//fmt.Println(4294967296 / 2)
 
 	//fmt.Println(13*4*215)
 	//fmt.Println(60*60*60)

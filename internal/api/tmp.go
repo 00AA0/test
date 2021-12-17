@@ -3,6 +3,8 @@ package api
 import (
 	"fmt"
 	"github.com/go-mysql-org/go-mysql/canal"
+	"sort"
+	"sync"
 )
 
 // https://www.wenjiangs.com/doc/canal-introduce   canal文档
@@ -41,4 +43,34 @@ func StartCanal() {
 
 	// Start canal
 	c.Run()
+}
+
+func Goruntine() {
+
+	wg := &sync.WaitGroup{}
+
+	ch1 := make(chan int)
+	//ch2 := make(chan int)
+	// 开启goroutine将0~100的数发送到ch1中
+	for j := 0; j < 3; j++ {
+		wg.Add(1)
+		go func(j int) {
+			defer wg.Done()
+			for i := j * 10; i < 10+j*10; i++ {
+				ch1 <- i
+			}
+		}(j)
+	}
+
+	go func() {
+		wg.Wait()
+		close(ch1)
+	}()
+	// 在主goroutine中从ch2中接收值打印
+	var arr []int
+	for i := range ch1 { // 通道关闭后会退出for range循环
+		arr = append(arr, i)
+	}
+	sort.Ints(arr)
+	fmt.Println(arr)
 }
