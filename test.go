@@ -83,7 +83,7 @@ func Match(target string) bool {
 
 func main() {
 
-	api.Goruntine()
+	api.StartConsumer()
 
 	//fmt.Println(500005 % 16)
 	//fmt.Println(100000019389 % 16)

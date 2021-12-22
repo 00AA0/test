@@ -52,11 +52,11 @@ func Goruntine() {
 	ch1 := make(chan int)
 	//ch2 := make(chan int)
 	// 开启goroutine将0~100的数发送到ch1中
-	for j := 0; j < 3; j++ {
+	for j := 0; j < 2; j++ {
 		wg.Add(1)
 		go func(j int) {
 			defer wg.Done()
-			for i := j * 10; i < 10+j*10; i++ {
+			for i := j * 5; i < 5+j*5; i++ {
 				ch1 <- i
 			}
 		}(j)
@@ -68,9 +68,14 @@ func Goruntine() {
 	}()
 	// 在主goroutine中从ch2中接收值打印
 	var arr []int
-	for i := range ch1 { // 通道关闭后会退出for range循环
+	for i := range ch1 {
 		arr = append(arr, i)
 	}
+	//for i := 0; i < 15; i++ {
+	//	tmp, ok := <- ch1
+	//	fmt.Println(tmp, ok)
+	//	arr = append(arr, tmp)
+	//}
 	sort.Ints(arr)
 	fmt.Println(arr)
 }

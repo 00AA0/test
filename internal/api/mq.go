@@ -7,6 +7,7 @@ import (
 	"github.com/apache/rocketmq-client-go/v2"
 	"github.com/apache/rocketmq-client-go/v2/consumer"
 	"github.com/apache/rocketmq-client-go/v2/primitive"
+	"strings"
 	"time"
 )
 
@@ -20,7 +21,7 @@ func StartConsumer() {
 		consumer.WithGroupName("test_consumer"),
 		consumer.WithConsumerModel(consumer.Clustering),
 		consumer.WithNameServer(primitive.NamesrvAddr{"127.0.0.1:9876"}),
-		consumer.WithStrategy(consumer.AllocateByAveragely))
+		consumer.WithStrategy(consumer.AllocateByAveragelyCircle))
 
 	if err != nil {
 		fmt.Println(err)
@@ -42,8 +43,22 @@ func StartConsumer() {
 		return 0, nil
 	}
 
-	err = MQConsumer.Subscribe("test_topic", consumer.MessageSelector{}, f)
-	//err := api.MQConsumer.Subscribe("test_topic", selector, f)
+	tags := []string{}
+	var expr string
+	if len(tags) == 0 {
+		expr = "*"
+	} else if len(tags) == 1 {
+		expr = tags[0]
+	} else {
+		expr = strings.Join(tags, "||")
+	}
+
+	selector := consumer.MessageSelector{
+		Type:       consumer.TAG,
+		Expression: expr,
+	}
+
+	err = MQConsumer.Subscribe("test_topic", selector, f)
 	if err != nil {
 		fmt.Println(err)
 	}
