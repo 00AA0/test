@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36a8a31d-9b59-4e0a-b360-3b506852aaf7" name="Default Changelist" comment="test">
+      <change afterPath="$PROJECT_DIR$/internal/api/mq.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test.go" afterDir="false" />
     </list>
@@ -78,6 +79,15 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
+    <configuration name="go build mq.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="test" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/internal/api/mq.go" />
+      <package value="test" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build redis.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="test" />
       <working_directory value="$PROJECT_DIR$" />
@@ -101,14 +111,15 @@
       <item itemvalue="Go Build.go build main.go" />
       <item itemvalue="Go Build.go build test.go" />
       <item itemvalue="Go Build.go build redis.go" />
+      <item itemvalue="Go Build.go build mq.go" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Go Build.go build test.go" />
+        <item itemvalue="Go Build.go build mq.go" />
         <item itemvalue="Go Build.go build redis.go" />
         <item itemvalue="Go Build.go build main.go" />
         <item itemvalue="Go Build.go build casbin" />
-        <item itemvalue="Go Build.go build test.go" />
       </list>
     </recent_temporary>
   </component>
@@ -185,6 +196,151 @@
           <url>file://$PROJECT_DIR$/internal/api/resp.go</url>
           <line>13</line>
           <option name="timeStamp" value="109" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/producer/producer.go</url>
+          <line>541</line>
+          <option name="timeStamp" value="145" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/internal/client.go</url>
+          <line>261</line>
+          <option name="timeStamp" value="150" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/internal/client.go</url>
+          <line>232</line>
+          <option name="timeStamp" value="151" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/!burnt!sushi/toml@v0.3.1/decode.go</url>
+          <line>450</line>
+          <option name="timeStamp" value="153" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/primitive/result.go</url>
+          <line>58</line>
+          <option name="timeStamp" value="154" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/davecgh/go-spew@v1.1.1/spew/common.go</url>
+          <line>131</line>
+          <option name="timeStamp" value="155" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/davecgh/go-spew@v1.1.1/spew/common.go</url>
+          <line>136</line>
+          <option name="timeStamp" value="156" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/google/go-cmp@v0.5.5/cmp/compare_test.go</url>
+          <line>466</line>
+          <option name="timeStamp" value="157" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/google/go-cmp@v0.5.5/cmp/compare_test.go</url>
+          <line>473</line>
+          <option name="timeStamp" value="158" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/google/go-cmp@v0.5.5/cmp/compare_test.go</url>
+          <line>1158</line>
+          <option name="timeStamp" value="159" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/google/go-cmp@v0.5.5/cmp/report_reflect.go</url>
+          <line>136</line>
+          <option name="timeStamp" value="160" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/google/go-cmp@v0.5.5/cmp/report_text.go</url>
+          <line>303</line>
+          <option name="timeStamp" value="161" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/golang.org/x/text@v0.3.6/message/print.go</url>
+          <line>639</line>
+          <option name="timeStamp" value="162" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/internal/remote/codec.go</url>
+          <line>425</line>
+          <option name="timeStamp" value="165" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/producer/producer.go</url>
+          <line>559</line>
+          <option name="timeStamp" value="169" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/consumer/offset_store.go</url>
+          <line>361</line>
+          <option name="timeStamp" value="170" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/internal/client.go</url>
+          <line>656</line>
+          <option name="timeStamp" value="171" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/internal/remote/codec.go</url>
+          <line>109</line>
+          <option name="timeStamp" value="173" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/internal/remote/codec.go</url>
+          <line>326</line>
+          <option name="timeStamp" value="174" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/internal/remote/codec.go</url>
+          <line>360</line>
+          <option name="timeStamp" value="175" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/internal/remote/codec.go</url>
+          <line>366</line>
+          <option name="timeStamp" value="176" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/internal/mock_client.go</url>
+          <line>284</line>
+          <option name="timeStamp" value="196" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/producer/producer.go</url>
+          <line>204</line>
+          <option name="timeStamp" value="203" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/internal/client.go</url>
+          <line>596</line>
+          <option name="timeStamp" value="206" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/internal/client.go</url>
+          <line>587</line>
+          <option name="timeStamp" value="207" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/internal/route.go</url>
+          <line>354</line>
+          <option name="timeStamp" value="209" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/producer/producer.go</url>
+          <line>209</line>
+          <option name="timeStamp" value="212" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/producer/producer.go</url>
+          <line>170</line>
+          <option name="timeStamp" value="217" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/apache/rocketmq-client-go/v2@v2.1.0/producer/producer.go</url>
+          <line>169</line>
+          <option name="timeStamp" value="220" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
